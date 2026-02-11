@@ -1,0 +1,17 @@
+# ✅ Competitions list
+/competitions               /competitions/index.html           200
+/competitions/              /competitions/index.html           200
+
+# ✅ Competition detail fallback template
+/competitions/*             /competitions/view/index.html      200
+
+# ✅ Rankings
+/rankings                   /rankings/index.html               200
+/rankings/                  /rankings/index.html               200
+/rankings/*                 /rankings/index.html               200
+
+# ✅ Persons
+/persons/*                  /persons/index.html                200
+
+# ✅ Timer
+/timer/*                    /timer/index.html                  200
