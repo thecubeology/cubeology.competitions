@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>H2H Rules | Cubing Clash 3.0 (CC2026)</title>
+  <meta name="description" content="Head-to-Head rules for Cubing Clash 3.0 (CC2026): video conferencing flow, Stackmat compulsory, scrambles, alternate solving, and Bo5/Bo7 Playoff structure: Q1, Eliminator, Q2, Final + WCA regulations." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../cc2026.css" />
+
+  <style>
+    :root { color-scheme: dark; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+    /* Page shell */
+    .rules-shell{ min-height:100vh; }
+    .rules-top{
+      padding: 28px 0 10px;
+    }
+
+    .rules-topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+
+    .rules-back{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      text-decoration:none;
+      color: var(--cc-text, #f3f3f3);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: .22s;
+      font-weight: 700;
+    }
+    .rules-back:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,215,0,.22);
+      background: rgba(255,215,0,.06);
+      color: var(--cc-gold, #ffd700);
+    }
+    .rules-back svg{ width:18px; height:18px; }
+
+    .rules-switch{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .rules-tab{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration:none;
+      font-weight: 800;
+      letter-spacing: .02em;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: var(--cc-text-muted, rgba(255,255,255,.75));
+      transition: .22s;
+    }
+    .rules-tab:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,215,0,.25);
+      background: rgba(255,215,0,.06);
+      color: var(--cc-gold, #ffd700);
+    }
+    .rules-tab.is-active{
+      color: #0a0a0a;
+      background: var(--cc-gold, #ffd700);
+      border-color: rgba(255,215,0,.35);
+      box-shadow: 0 10px 28px rgba(255,215,0,.18);
+    }
+
+    /* Hero */
+    .rules-hero{
+      padding: 14px 0 18px;
+    }
+    .rules-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,215,0,.10);
+      border: 1px solid rgba(255,215,0,.18);
+      color: var(--cc-gold, #ffd700);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      font-size: .72rem;
+    }
+    .rules-title{
+      margin: 14px 0 10px;
+      font-size: clamp(2.1rem, 4.5vw, 3.35rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .rules-lead{
+      max-width: 980px;
+      color: var(--cc-text-muted, rgba(255,255,255,.75));
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* Layout */
+    .rules-layout{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 4px 0 56px; /* FIX: removed the unnecessary extra top gap */
+    }
+
+    .rules-card{
+      border-radius: 18px;
+      border: 1px solid rgba(255,215,0,.14);
+      background: linear-gradient(145deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+      padding: 18px 18px;
+    }
+    .rules-card h2{
+      margin: 0 0 10px;
+      font-size: 1.22rem;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .rules-dot{
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--cc-gold, #ffd700);
+      box-shadow: 0 0 18px rgba(255,215,0,.35);
+      flex: 0 0 auto;
+    }
+    .rules-list{
+      margin: 0;
+      padding-left: 1.15rem;
+      color: var(--cc-text-muted, rgba(255,255,255,.75));
+      line-height: 1.7;
+    }
+    .rules-list li{ margin: .55rem 0; }
+
+    .rules-callout{
+      margin-top: 12px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,215,0,.18);
+      background: rgba(255,215,0,.08);
+      color: var(--cc-text-muted, rgba(255,255,255,.75));
+    }
+    .rules-callout strong{ color: var(--cc-gold, #ffd700); }
+
+    /* Small footer */
+    .rules-footer{
+      padding: 22px 0 28px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      background: rgba(5,5,5,.45);
+      backdrop-filter: blur(12px);
+    }
+    .rules-footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      color: var(--cc-text-muted, rgba(255,255,255,.72));
+      font-size: .95rem;
+    }
+
+    /* Better spacing on small screens */
+    @media (max-width: 520px){
+      .rules-tab, .rules-back{ width: 100%; justify-content:center; }
+      .rules-switch{ width: 100%; }
+      .rules-topbar{ align-items: stretch; }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="rules-shell page-wrapper">
+    <header class="rules-top section">
+      <div class="container">
+        <div class="rules-topbar">
+          <a class="rules-back" href="../" aria-label="Back to overview">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Overview
+          </a>
+
+          <div class="rules-switch" aria-label="Switch rules pages">
+            <a class="rules-tab" href="prelims_rules.html">Prelims Rules</a>
+            <a class="rules-tab is-active" href="h2h_rules.html" aria-current="page">H2H Rules</a>
+          </div>
+        </div>
+
+        <div class="rules-hero">
+          <span class="rules-kicker">Head-to-Head • Playoffs • Finals</span>
+          <h1 class="rules-title">H2H Rules</h1>
+          <p class="rules-lead">
+            H2H rounds happen on <strong style="color:var(--cc-gold);">video conferencing platforms</strong>
+            (not fixed to Google Meet). Credentials will be shared with qualified participants.
+            Join <strong style="color:var(--cc-gold);">5–10 minutes earlier</strong> for setup.
+            Scrambles are shared in the call and solving is <strong style="color:var(--cc-gold);">alternate</strong>.
+          </p>
+
+          <div class="rules-callout">
+            <strong>Mandatory:</strong> <strong>Stackmat timer is compulsory</strong> for H2H matches in <strong>Playoffs</strong> and <strong>Finals</strong>.
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container">
+        <div class="rules-layout">
+
+     <section class="rules-card">
+  <h2><span class="rules-dot"></span>3×3 Playoffs Format (Top 8)</h2>
+
+  <div class="rules-format">
+
+    <div class="rules-stage">
+      <div class="rules-stage-title">Quarterfinals (Bo5)</div>
+      <div class="rules-stage-lines">
+        Seed 1 vs Seed 8<br>
+        Seed 2 vs Seed 7<br>
+        Seed 3 vs Seed 6<br>
+        Seed 4 vs Seed 5
+      </div>
+    </div>
+
+    <div class="rules-stage">
+      <div class="rules-stage-title">Semi-finals (Bo5)</div>
+      <div class="rules-stage-lines">
+        Winner of Seed 1 vs 8 plays Winner of Seed 3 vs 6<br>
+        Winner of Seed 2 vs 7 plays Winner of Seed 4 vs 5
+      </div>
+    </div>
+
+    <div class="rules-stage">
+      <div class="rules-stage-title">3rd Place Match (Bo5)</div>
+      <div class="rules-stage-lines">
+        Losers of Semi-finals compete for 3rd place
+      </div>
+    </div>
+
+    <div class="rules-stage">
+      <div class="rules-stage-title rules-stage-title-final">Final (Bo7)</div>
+      <div class="rules-stage-lines">
+        Winners of Semi-finals compete for the Championship
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- Other Events Playoffs Format -->
+<section class="rules-card">
+  <h2><span class="rules-dot"></span>2×2, Pyraminx, Skewb & Clock Playoffs Format (Top 4)</h2>
+
+  <ul class="rules-list">
+    <li><strong>Qualifier 1 (Bo5):</strong> Seed 1 vs Seed 2 — winner goes to Final, loser goes to Qualifier 2.</li>
+
+    <li><strong>Eliminator (Bo5):</strong> Seed 3 vs Seed 4 — winner goes to Qualifier 2, loser finishes 4th.</li>
+
+    <li><strong>Qualifier 2 (Bo5):</strong> Loser of Qualifier 1 vs Winner of Eliminator — winner goes to Final, loser finishes 3rd.</li>
+
+    <li><strong>Final (Bo7):</strong> Winner of Qualifier 1 vs Winner of Qualifier 2 — winner is crowned Champion.</li>
+  </ul>
+
+  <div class="rules-callout">
+    This format applies to <strong>2×2, Pyraminx, Skewb, and Clock</strong>.
+  </div>
+</section>
+
+
+          <!-- NEW: WCA Regulations -->
+          <section class="rules-card">
+            <h2><span class="rules-dot"></span>Regulations</h2>
+            <ul class="rules-list">
+              <li>Standard <strong>WCA Regulations</strong> will apply wherever possible.</li>
+              <li>In case of conflict, Cubing Clash event-specific rules take priority.</li>
+            </ul>
+            <div class="rules-callout">
+              View WCA Regulations:
+              <a href="https://www.worldcubeassociation.org/regulations/" target="_blank" rel="noopener noreferrer"
+                 style="color:var(--cc-gold);text-decoration:none;font-weight:800;">
+                worldcubeassociation.org/regulations
+              </a>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+
+    <footer class="rules-footer">
+      <div class="container">
+        <div class="rules-footer-inner">
+          <span>© 2026 The Cubeology • Cubing Clash 3.0</span>
+          <span>H2H • Sets-based matches</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      const makeVisible = () => {
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => el.classList.add('visible'));
+      };
+      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', makeVisible);
+      else makeVisible();
+    })();
+  </script>
+</body>
+</html>

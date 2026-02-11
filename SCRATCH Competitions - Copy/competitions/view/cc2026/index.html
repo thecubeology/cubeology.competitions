@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cubing Clash 3.0 (CC2026) | India's Premier Online Speedcubing Competition</title>
+  <meta name="description" content="Join Cubing Clash 3.0 — India's biggest online speedcubing competition. ₹60,000+ prize pool. 5 events. Compete from anywhere. Register now!">
+  <meta name="keywords" content="speedcubing, online competition, rubik's cube, 3x3, 2x2, pyraminx, skewb, clock, india, cubing clash">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cubing Clash 3.0 (CC2026) | India's Premier Online Speedcubing Competition">
+  <meta property="og:description" content="₹60,000+ prize pool. 5 events. Compete from anywhere. Register now!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://competitions.thecubeology.com/competitions/view/cc2026/">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="cc2026.css">
+
+  <!-- External Scripts (preserved from original) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <!-- Particle Canvas -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Gradient Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="page-wrapper">
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="navbar">
+      <div class="navbar-inner">
+        <div class="navbar-left">
+          <a href="/competitions/" class="nav-back" aria-label="Back to competitions">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span>Back</span>
+          </a>
+          <div class="nav-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+            <span>CC2026</span>
+          </div>
+        </div>
+
+        <div class="navbar-tabs" role="tablist" aria-label="Page sections">
+          <button class="tabBtn" data-tab="overview" role="tab" aria-selected="false"><span>Overview</span></button>
+          <button class="tabBtn" data-tab="dates" role="tab" aria-selected="false"><span>Dates</span></button>
+          <button class="tabBtn" data-tab="format" role="tab" aria-selected="false"><span>Format & Rules</span></button>
+          <button class="tabBtn" data-tab="fees" role="tab" aria-selected="false"><span>Fees</span></button>
+<button class="tabBtn" data-tab="referral" role="tab" aria-selected="false"><span>Referral</span></button>
+<button class="tabBtn" data-tab="winners" role="tab" aria-selected="false"><span>Winners</span></button>
+          <button class="tabBtn" data-tab="faq" role="tab" aria-selected="false"><span>FAQ</span></button>
+        </div>
+
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero section" id="overview" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-content">
+
+          <!-- Badge -->
+          <div class="hero-badge" id="heroBadge">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+            <span>India's #1 Online Speedcubing Competition</span>
+          </div>
+
+          <!-- Title -->
+          <h1 class="hero-title" id="hero-title">
+            <span class="line" id="titleLine1">Cubing Clash</span>
+            <span class="line" id="titleLine2">3.0</span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="hero-subtitle" id="heroSubtitle">Compete with top cubers from around the world — right from your home.</p>
+
+        
+          <!-- Stats Grid -->
+          <div class="hero-stats-grid" id="heroStats">
+
+            <div class="stat-card">
+              <div class="stat-value" data-countup="60000" data-prefix="₹" data-suffix="+">₹60,000+</div>
+              <div class="stat-label">Prize Pool</div>
+            </div>
+
+</div>
+
+          
+
+          <!-- Events Block (NEW) -->
+          <div class="events-inline-block reveal" id="eventsInlineBlock" aria-label="Events">
+            <div class="events-inline-title">Events:</div>
+            <div class="events-inline-chips" role="list">
+              <span class="events-chip" role="listitem">3×3</span>
+              <span class="events-chip" role="listitem">2×2</span>
+              <span class="events-chip" role="listitem">Pyraminx</span>
+              <span class="events-chip" role="listitem">Skewb</span>
+              <span class="events-chip" role="listitem">Clock</span>
+            </div>
+          </div>
+
+          <!-- Age Categories Block (NEW) -->
+          <div class="events-inline-block reveal" id="ageCategoriesInlineBlock" aria-label="Age Categories">
+            <div class="events-inline-title">Age Categories:</div>
+            <div class="events-inline-chips" role="list">
+              <span class="events-chip" role="listitem">Upto 10 Yrs</span>
+              <span class="events-chip" role="listitem">11 - 14 Yrs</span>
+              <span class="events-chip" role="listitem">15+ Yrs</span>
+            </div>
+          </div>
+
+          
+          <!-- Registrations Milestones (Auto-synced) -->
+          <div class="regmeter regmeter--milestones" id="regMeter" aria-label="Registrations milestones">
+            <div class="regmeter-top">
+              <div class="regmeter-title">Registrations</div>
+              <div class="regmeter-pill" id="regmeterPill">Syncing…</div>
+            </div>
+
+            <div class="regmeter-main regmeter-main--milestones">
+              <div class="regmeter-count">
+                <span id="regmeterCountLive">—</span>
+                <span class="regmeter-count-label">registered</span>
+              </div>
+              <div class="regmeter-sub">
+                <span class="regmeter-remaining" id="regmeterMilestoneHint">Next milestone: —</span>
+              </div>
+            </div>
+
+            <div class="ms-nextcard" aria-label="Next milestone reward">
+              <div class="ms-next-top">
+                <span class="ms-next-kicker">Next Milestone Reward</span>
+                <span class="ms-next-live" id="msNextLive">Updating…</span>
+              </div>
+              <div class="ms-next-main">
+                <div class="ms-next-at">at <span id="msNextTarget">—</span> registrations</div>
+                <div class="ms-next-reward" id="msNextReward">—</div>
+              </div>
+            </div>
+
+            <!-- Segmented milestone progress (0 → 150) -->
+<div class="ms-segwrap" aria-label="Milestone progress">
+  <div class="ms-segbar" id="msSegBar" role="progressbar" aria-valuemin="0" aria-valuemax="150" aria-valuenow="0" aria-label="Milestone progress">
+    <div class="ms-seg" data-seg="0-100">
+      <div class="ms-seg-fill" id="msSegFill100" style="width:0%"></div>
+    </div>
+    <div class="ms-seg" data-seg="100-125">
+      <div class="ms-seg-fill" id="msSegFill125" style="width:0%"></div>
+    </div>
+    <div class="ms-seg" data-seg="125-150">
+      <div class="ms-seg-fill" id="msSegFill150" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="ms-seglabels" aria-hidden="true">
+    <div class="ms-seglabel ms-seglabel-100">100</div>
+    <div class="ms-seglabel ms-seglabel-125">125</div>
+    <div class="ms-seglabel ms-seglabel-150">150</div>
+  </div>
+</div>
+
+<div class="ms-slabs"
+ aria-label="Milestone slabs">
+              <div class="ms-slab"><span class="ms-slab-num">100</span><span class="ms-slab-text">₹75,000+ Prize Pool</span></div>
+              <div class="ms-slab"><span class="ms-slab-num">125</span><span class="ms-slab-text">3×3 Top 16 Prizes</span></div>
+              <div class="ms-slab"><span class="ms-slab-num">150</span><span class="ms-slab-text">₹1,00,000+ Prize Pool</span></div>
+</div>
+
+            <!-- Clean dropdown details -->
+            <details class="ms-details" id="msDetails">
+              <summary class="ms-summary">
+                Milestone rewards & upgrades
+                <span class="ms-chevron" aria-hidden="true"></span>
+              </summary>
+
+              <div class="ms-details-body">
+                <div class="ms-row" id="msRow100" data-ms="100">
+                  <div class="ms-row-left">
+                    <div class="ms-row-title">100 registrations</div>
+                    <div class="ms-row-desc">
+                      Prize pool upgrades to <strong>₹75,000+</strong>.
+                      <span class="ms-workshop" id="msWorkshopText">
+                        Plus: first 100 registrants get access to a special pre‑competition workshop on competing & improving in online events — conducted by a <strong>multi‑time National Record Holder</strong>.
+                      </span>
+                    </div>
+                  </div>
+                  <div class="ms-row-badge" id="msBadge100">Locked</div>
+                </div>
+
+                <div class="ms-row" id="msRow125" data-ms="125">
+                  <div class="ms-row-left">
+                    <div class="ms-row-title">125 registrations</div>
+                    <div class="ms-row-desc">
+                      <strong>3×3 guaranteed prizes expand to Top 16</strong> (higher chances of winning).
+                    </div>
+                  </div>
+                  <div class="ms-row-badge" id="msBadge125">Locked</div>
+                </div>
+
+                <div class="ms-row" id="msRow150" data-ms="150">
+                  <div class="ms-row-left">
+                    <div class="ms-row-title">150 registrations</div>
+                    <div class="ms-row-desc">
+                      Prize pool upgrades to <strong>₹1,00,000+</strong>.
+                    </div>
+                  </div>
+                  <div class="ms-row-badge" id="msBadge150">Locked</div>
+                </div>
+</div>
+            </details>
+          </div>
+
+
+
+          <!-- CTA Area -->
+          <div class="cta-area" id="ctaArea">
+            <div class="hero-pills" id="heroPills"></div>
+            <div class="cta-row" id="ctaRow"></div>
+            <p class="cta-note" id="ctaNote"></p>
+          </div>
+
+
+          <div class="eligibility-block reveal">
+            <h3>Who Can Compete?</h3>
+            <ul>
+              <li>✔ Cubers from any country can participate online</li>
+              <li>✔ All age groups allowed (results split into age categories)</li>
+              <li>✔ Stable internet + camera setup required</li>
+              <li>✔ Standard WCA regulations apply wherever possible</li>
+            </ul>
+            <p class="eligibility-note">
+              International cubers are fully eligible to compete. Only physical prize shipping is restricted to Indian addresses.
+            </p>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="trust-badges" id="trustBadges">
+            <div class="trust-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span>Verified Results</span>
+            </div>
+            <div class="trust-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <span>Secure Payment</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== DATES SECTION ========== -->
+    <section class="section dates-section" id="dates" aria-labelledby="dates-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Schedule</span>
+          <h2 class="section-title" id="dates-title">Competition Timeline</h2>
+          <p class="section-subtitle">Early bird, prelims slots, head‑to‑head rounds, and playoffs — everything in one place.</p>
+        </div>
+
+
+        
+        </div>
+
+
+        <div class="timeline-container reveal">
+          <div class="timeline-line"></div>
+          <div class="timeline-items">
+
+            <div class="timeline-item reveal-left stagger-1" data-start="01/01/2026 00:00:00" data-end="28/02/2026 23:59:59">
+              <div class="timeline-item-content">
+                <span class="timeline-date-badge">01 Feb – 28 Feb 2026</span>
+                <h3 class="timeline-title">Early Bird Registration</h3>
+                <p class="timeline-desc">
+                  Early Bird pricing was originally limited to 30 registrations — and SOLD OUT in just ONE DAY!
+                  Due to overwhelming response, Early Bird has been extended to 50 total registrations. Once 50 registrations are reached, regular pricing applies.
+                </p>
+              </div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-spacer"></div>
+            </div>
+
+            <div class="timeline-item reveal-right stagger-2" data-start="01/03/2026 00:00:00" data-end="09/04/2026 12:00:00">
+              <div class="timeline-spacer"></div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-item-content">
+                <span class="timeline-date-badge">01 Mar – 09 Apr 2026</span>
+                <h3 class="timeline-title">Normal Registration</h3>
+                <p class="timeline-desc">Normal pricing applies after Early Bird ends (or once 50 registrations are reached). Registration closes on 09 April 2026, 12:00 IST.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item reveal-left stagger-3" data-start="09/04/2026 12:00:01" data-end="09/04/2026 23:59:59">
+              <div class="timeline-item-content">
+                <span class="timeline-date-badge">09 Apr 2026</span>
+                <h3 class="timeline-title">Slots Shared</h3>
+                <p class="timeline-desc">After registration closes, you’ll receive your Compete page credentials + final slot details on email.</p>
+              </div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-spacer"></div>
+            </div>
+
+            <div class="timeline-item reveal-right stagger-4" data-start="10/04/2026 00:00:00" data-end="12/04/2026 23:59:59">
+              <div class="timeline-spacer"></div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-item-content">
+                <span class="timeline-date-badge">10–12 Apr 2026</span>
+                <h3 class="timeline-title">Prelims (Ao5)</h3>
+                <p class="timeline-desc">Prelims are Average of 5 for each event. You compete on only 1 of the 3 days — all your events on your chosen day + slot.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item reveal-left stagger-5" data-start="18/04/2026 00:00:00" data-end="19/04/2026 23:59:59">
+              <div class="timeline-item-content">
+                <span class="timeline-date-badge">18–19 Apr 2026</span>
+                <h3 class="timeline-title">Playoffs & Finals (H2H) — Pyraminx / Skewb / Clock</h3>
+                <p class="timeline-desc">Top 4 from Prelims for Pyraminx / Skewb / Clock will compete in Playoffs in Bo5 sets and Bo7 set to win the title.</p>
+              </div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-spacer"></div>
+            </div>
+
+            <div class="timeline-item reveal-right stagger-6" data-start="25/04/2026 00:00:00" data-end="26/04/2026 23:59:59">
+              <div class="timeline-spacer"></div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-item-content">
+                <span class="timeline-date-badge">25–26 Apr 2026</span>
+                <h3 class="timeline-title">Playoffs & Finals (H2H) — 3×3 / 2×2</h3>
+                <p class="timeline-desc">Top 8 from Prelims for 3×3 & Top 4 from 2×2 will compete in Playoffs in Bo5 sets and Bo7 set to win the title.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top: var(--space-2xl); text-align: center;">
+          <p style="color: var(--cc-text-muted); font-size: 0.95rem;">
+            <strong style="color: var(--cc-gold);">Registration Opens:</strong> <span id="regOpenText">—</span> &nbsp;|&nbsp;
+            <strong style="color: var(--cc-gold);">Registration Closes:</strong> <span id="regCloseText">—</span>
+          </p>
+                 </div>
+      </div>
+    </section>
+
+    <!-- ========== FORMAT SECTION ========== -->
+    <section class="section format-section" id="format" aria-labelledby="format-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Structure</span>
+          <h2 class="section-title" id="format-title">Format & Rules</h2>
+          <p class="section-subtitle">Prelims decide qualification. Playoffs & Finals are Head‑to‑Head matches.</p>
+        </div>
+
+        <div class="format-grid">
+
+          <!-- Prelims -->
+          <div class="format-card reveal">
+            <div class="format-card-header">
+              <div class="format-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="format-title">Prelims</h3>
+                <p class="format-subtitle">Ao5 for every event</p>
+              </div>
+              </div>
+
+            <div class="format-flow">
+              <div class="flow-step">
+                <span class="flow-number">1</span>
+                <div class="flow-content">
+                  <span class="flow-title">One Day, One Slot</span>
+                  <span class="flow-desc">You compete on only one of the 3 prelim days. All your events on your chosen day + slot.</span>
+                </div>
+</div>
+              <div class="flow-step">
+                <span class="flow-number">2</span>
+                <div class="flow-content">
+                  <span class="flow-title">Compete Page Timer</span>
+                  <span class="flow-desc">Use the inbuilt timer or your Stackmat + typing input.</span>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-number">3</span>
+                <div class="flow-content">
+                  <span class="flow-title">Qualification</span>
+                  <span class="flow-desc">Top qualifiers proceed to Head‑to‑Head rounds (varies by event).</span>
+                </div>
+              </div>
+            </div>
+          <div class="format-card-cta">
+              <a href="/competitions/view/cc2026/rules/prelims_rules" class="btn btn-secondary format-rules-btn">Prelims Rules</a>
+            </div>
+
+            </div>
+<!-- H2H -->
+          <div class="format-card reveal stagger-1">
+            <div class="format-card-header">
+              <div class="format-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 15a4 4 0 004 4h12m0 0l-3-3m3 3l-3 3M20 9a4 4 0 00-4-4H4m0 0l3 3M4 5l3-3" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="format-title">Head‑to‑Head Matches</h3>
+                <p class="format-subtitle">Playoffs • Finals</p>
+              </div>
+              </div>
+
+            <div class="format-flow">
+              <div class="flow-step">
+                <span class="flow-number">1</span>
+                <div class="flow-content">
+                  <span class="flow-title">Join Early</span>
+                  <span class="flow-desc">Join the video call 5–10 minutes early for setup. Credentials are shared to participants.</span>
+                </div>
+</div>
+              <div class="flow-step">
+                <span class="flow-number">2</span>
+                <div class="flow-content">
+                  <span class="flow-title">Alternate Solving</span>
+                  <span class="flow-desc">Scrambles shared in the call. Alternate solving format.</span>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-number">3</span>
+                <div class="flow-content">
+                  <span class="flow-title">Bo5 / Bo7 Sets :</span>
+                  <span class="flow-desc">Bo5 sets for Playoffs & Bo7 sets for Finals.</span>
+                </div>
+              </div>
+            </div>
+          <div class="format-card-cta">
+              <a href="/competitions/view/cc2026/rules/h2h_rules" class="btn btn-secondary format-rules-btn">H2H Rules</a>
+            </div>
+
+            </div>
+</div>
+
+        </div>
+    </section>
+
+    <!-- ========== FEES SECTION ========== -->
+    <section class="section fees-section" id="fees" aria-labelledby="fees-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Fees</span>
+          <h2 class="section-title" id="fees-title">Fees & Prizes</h2>
+          <p class="section-subtitle">Choose your number of events — total updates automatically.</p>
+        </div>
+
+        <div class="fees-grid">
+
+          <!-- Fee Card (Calculator) -->
+          <div class="fee-card reveal">
+            <div class="fee-header">
+<div style="display:flex;flex-direction:column;gap:.35rem;">
+                <h3 class="fee-title">Registration Fees Calculator</h3>
+                <div class="hero-pills" id="feePills" style="justify-content:flex-start;"></div>
+              </div>
+            </div>
+
+            <!-- Calculator Wrap (IDs expected by JS) -->
+            <div id="feeCalcWrap" class="fee-calculator">
+              <div class="fee-mode-toggle">
+                <button type="button" class="toggle-btn active" id="feeModeAuto">Auto</button>
+                <button type="button" class="toggle-btn" id="feeModeEarly">Early Bird</button>
+                <button type="button" class="toggle-btn" id="feeModeNormal">Normal</button>
+              </div>
+
+              <div class="fee-breakdown">
+                <div class="fee-item">
+                  <span class="fee-item-label">Number of events</span>
+                  <span class="fee-item-value">
+                    <select id="feeEventsSelect" class="newsletter-input" style="max-width:140px;">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="fee-item">
+                  <span class="fee-item-label">Total payable</span>
+                  <span class="fee-item-value" style="color: var(--cc-gold); font-weight: 800; font-size: 1.2rem;">
+                    <span id="feeTotal">₹—</span>
+                  </span>
+                </div>
+              </div>
+
+              <p class="fee-note" id="feeBreakdown" style="margin-top: 1rem;">
+                Fees: ₹299 base + ₹100 per event (Early Bird till 28 Feb 2026, 11:59 PM IST) • ₹399 base + ₹100 per event (Normal)
+              </p>
+
+              <p class="fee-note">
+                Fees are non-refundable. Registration status may take some time to reflect after payment.
+              </p>
+            </div>
+          </div>
+
+          <!-- Prize Card -->
+          <div class="fee-card prize-card reveal stagger-1">
+            <div class="fee-header">
+<h3 class="fee-title">Prize Pool</h3>
+            </div>
+
+            <div class="fee-amount" data-countup="60000" data-prefix="₹" data-suffix="+">₹60,000+</div>
+
+            <div class="prize-tiers">
+              <div class="prize-tier">
+                <div class="prize-tier-content">
+                  <div class="prize-tier-name">Overall Guaranteed Prizes</div>
+                  <div class="prize-tier-desc" id="overallGuaranteedDesc"><span id="prizeOverallDesc">Top 8 across all events (overall category) will get guaranteed prizes.</span></div>
+                </div>
+              </div>
+              <div class="prize-tier">
+                <div class="prize-tier-content">
+                  <div class="prize-tier-name">3×3 Guaranteed Prizes</div>
+                  <div class="prize-tier-desc"><span id="prize3x3Desc">Top 8 overall in 3×3 will get confirmed prizes. (Unlocks Top 16 at 125+ registrations.)</span></div>
+                </div>
+              </div>
+
+
+              <div class="prize-tier">
+                <div class="prize-tier-content">
+                  <div class="prize-tier-name">Event-wise Prizes (Age Categories)</div>
+                  <div class="prize-tier-desc">Top 3 per event, per age category will win prizes.</div>
+                </div>
+              </div>
+
+              <div class="prize-tier">
+                <div class="prize-tier-content">
+                  <div class="prize-tier-name">Everyone Wins Something</div>
+                  <div class="prize-tier-desc">All participants will receive discount coupons.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prizes-cta">
+             <a href="prizes.html" class="btn btn-secondary">Check All Prizes</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== REFERRAL SECTION ========== -->
+    <section class="section referral-section" id="referral" aria-labelledby="referral-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Earn Rewards</span>
+          <h2 class="section-title" id="referral-title">Referral Program</h2>
+<p class="section-subtitle">Promote Cubing Clash 3.0, bring in new cubers, and unlock prizes with every valid referral.</p>
+        </div>
+
+        <div class="referral-grid">
+          <!-- How it works -->
+          <div class="referral-card reveal">
+            <div class="referral-card-header">
+              <div class="referral-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 class="referral-card-title">How to Join</h3>
+            </div>
+
+            <p class="referral-card-desc">
+              Anyone interested in promoting Cubing Clash 3.0 can become a referrer. Your referrals are counted only when a participant completes registration and mentions your name in the <strong>“Referred by”</strong> field on the payment page.
+            </p>
+
+            <div class="referral-mini-rules" role="note" aria-label="Referral rules checklist">
+              <div class="mini-rules-title">Referral Rules (must follow)</div>
+              <label class="mini-rule"><input type="checkbox" checked disabled><span>Your name must be mentioned in “Referred by”.</span></label>
+              <label class="mini-rule"><input type="checkbox" checked disabled><span>Only completed, valid registrations are counted.</span></label>
+              <label class="mini-rule"><input type="checkbox" checked disabled><span>Spelling must match exactly (same as your referrer form).</span></label>
+            </div>
+
+            <div class="referral-steps">
+              <div class="ref-step">
+                <span class="ref-step-num">1</span>
+                <div class="ref-step-body">
+                  <div class="ref-step-title">Fill the Referrer Form</div>
+                  <div class="ref-step-desc">Submit your details so we can track referrals correctly.</div>
+                </div>
+              </div>
+              <div class="ref-step">
+                <span class="ref-step-num">2</span>
+                <div class="ref-step-body">
+                  <div class="ref-step-title">Share &amp; Refer</div>
+                  <div class="ref-step-desc">Ask registrants to mention your name in “Referred by”.</div>
+                </div>
+              </div>
+              <div class="ref-step">
+                <span class="ref-step-num">3</span>
+                <div class="ref-step-body">
+                  <div class="ref-step-title">Win Prizes</div>
+                  <div class="ref-step-desc">Milestones unlock automatically as valid referrals increase.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="referral-cta">
+              <a class="btn btn-primary" href="https://forms.gle/oHrmFLfrsWu5iWuX8" target="_blank" rel="noopener">
+                Join Referral Program
+              </a>
+              <p class="referral-note">Only valid, completed registrations count.</p>
+            </div>
+          </div>
+
+          <!-- Rewards -->
+          <div class="referral-card rewards-card reveal stagger-1">
+            <div class="referral-card-header">
+              <div class="referral-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0a1.724 1.724 0 001.286 1.135c.969.204 1.357 1.39.688 2.054a1.724 1.724 0 00-.5 1.53c.171.983-.87 1.732-1.746 1.268a1.724 1.724 0 00-1.608 0c-.876.464-1.917-.285-1.746-1.268.126-.72-.118-1.455-.5-1.53-.669-.664-.281-1.85.688-2.054a1.724 1.724 0 001.286-1.135z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l-3 7 3-2 3 2-3-7z" />
+                </svg>
+              </div>
+              <h3 class="referral-card-title">Referral Rewards</h3>
+            </div>
+
+            <div class="reward-highlight">
+              <div class="reward-badge">Top Referrer Prize</div>
+              <div class="reward-title">QiYi Tornado v3 Premium - Flagship Version 3x3</div>
+              <div class="reward-desc">Awarded to the highest number of valid referrals by the end of registration.</div>
+              <div class="reward-min">Minimum <strong>3</strong> valid referrals required to be eligible.</div>
+            </div>
+
+            <div class="reward-milestones">
+              <div class="milestone">
+                <div class="milestone-left">
+                  <span class="milestone-count">3</span>
+                  <span class="milestone-label">Referrals</span>
+                </div>
+                <div class="milestone-prize">QiYi Warrior 3x3 UV</div>
+              </div>
+
+              <div class="milestone">
+                <div class="milestone-left">
+                  <span class="milestone-count">6</span>
+                  <span class="milestone-label">Referrals</span>
+                </div>
+                <div class="milestone-prize">Dayan Guhong Pro+ 55mm Spring 3x3</div>
+              </div>
+
+              <div class="milestone">
+                <div class="milestone-left">
+                  <span class="milestone-count">10</span>
+                  <span class="milestone-label">Referrals</span>
+                </div>
+                <div class="milestone-prize">Apex RS3M V5 Frosted Ballcore 3x3</div>
+              </div>
+            
+              <div class="milestone">
+                <div class="milestone-left">
+                  <span class="milestone-count">15</span>
+                  <span class="milestone-label">Referrals</span>
+                </div>
+                <div class="milestone-prize">Gan v100 Leap Year of the Horse Edition 3x3</div>
+              </div>
+</div>
+
+            <div class="referral-footnote">
+              Tip: Share your referral name clearly (same spelling) so it matches the “Referred by” field.
+            </div>
+          </div>
+        </div>
+      
+              
+</section>
+
+
+    <!-- ========== WINNERS SECTION ========== -->
+    <section id="winners" class="section winners-section">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-label">Champions</div>
+          <h2 class="section-title">Past Winners</h2>
+          <p class="section-subtitle">Legends who conquered Cubing Clash</p>
+        </div>
+
+        <div class="winners-showcase">
+
+          <!-- Winner 1 -->
+          <div class="winner-card-premium reveal">
+            <div class="winner-image-wrapper">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0840/6908/9558/files/Untitled_design_16.png?v=1769615332"
+                alt="CC 1.0 Champion"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://via.placeholder.com/600x600?text=Winner+Image';"
+              >
+              <div class="winner-overlay"></div>
+              <div class="winner-rank">1.0</div>
+            </div>
+
+            <div class="winner-info">
+              <div class="winner-name">Kunal Oak</div>
+              <div class="winner-title">Cubing Clash 1.0 Winner</div>
+              <a href="https://competitions.thecubeology.com/persons/?id=72" class="winner-link" target="_blank" rel="noopener">
+                View Profile
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M7 17L17 7M7 7h10v10"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Winner 2 -->
+          <div class="winner-card-premium reveal">
+            <div class="winner-image-wrapper">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0840/6908/9558/files/Untitled_design_17.png?v=1769615849"
+                alt="CC 2.0 Winner"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://via.placeholder.com/600x600?text=Winner+Image';"
+              >
+              <div class="winner-overlay"></div>
+              <div class="winner-rank">2.0</div>
+            </div>
+
+            <div class="winner-info">
+              <div class="winner-name">Pranav Gadge</div>
+              <div class="winner-title">Cubing Clash 2.0 Winner</div>
+              <a href="https://competitions.thecubeology.com/persons/?id=74" class="winner-link" target="_blank" rel="noopener">
+                View Profile
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M7 17L17 7M7 7h10v10"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Next Champion -->
+          <div class="next-champion-card reveal">
+            <div class="next-champion-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 2v20M2 12h20"/>
+              </svg>
+            </div>
+            <div class="next-champion-title">Next Champion?</div>
+            <div class="next-champion-text">Your name could be here</div>
+            <a href="#overview" class="btn btn-primary">Compete Now</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- ========== PAST EDITIONS (NEW) ========== -->
+    <section class="section past-editions-section" id="past-editions" aria-labelledby="past-editions-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">History</span>
+          <h2 class="section-title" id="past-editions-title">Past Editions</h2>
+          <p class="section-subtitle">Explore results from previous Cubing Clash editions.</p>
+        </div>
+
+        <div class="past-editions-grid reveal">
+          <a class="past-edition-card" href="/competitions/results/?id=cc2024">
+            <div class="past-edition-top">
+              <span class="past-edition-badge">Cubing Clash 1.0</span>
+              <span class="past-edition-year">2024</span>
+            </div>
+            <div class="past-edition-cta">View Results</div>
+          </a>
+
+          <a class="past-edition-card" href="/competitions/results/?id=cc2025">
+            <div class="past-edition-top">
+              <span class="past-edition-badge">Cubing Clash 2.0</span>
+              <span class="past-edition-year">2025</span>
+            </div>
+            <div class="past-edition-cta">View Results</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== FAQ SECTION ========== -->
+    <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Questions</span>
+          <h2 class="section-title" id="faq-title">Frequently Asked</h2>
+          <p class="section-subtitle">Clear answers. No confusion.</p>
+        </div>
+
+        <div class="faq-grid reveal">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How does Prelims work (Ao5)?</span>
+              <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Prelims are Average of 5 for each event. You will compete on only 1 of the 3 days, and you’ll do all your registered events in your selected day + slot.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How will I access the Compete page?</span>
+              <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                After registration closes on 09 April 2026 (12:00 IST), you will receive Compete page credentials on email. This is separate from your website login.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Is inspection mandatory?</span>
+              <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Yes. If you use the Timer mode, inspection timer is compulsory. If you use Typing mode, inspection is strongly suggested. You can start your solve without stopping inspection, but if you exceed 15 seconds, penalties apply.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What platform is used for Head‑to‑Head matches?</span>
+              <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                We use video conferencing platforms (not fixed to Google Meet). Credentials will be conveyed to qualified participants. Join 5–10 minutes earlier for setup.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Is Stackmat compulsory?</span>
+              <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                For Head‑to‑Head Playoffs, Stackmat timer is compulsory. For Prelims, you may use inbuilt timer or Stackmat + typing option.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Where can I watch playoffs highlights?</span>
+              <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Selected playoff videos will be posted on our YouTube channel. Follow @thecubeology to catch the highlights.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+              </svg>
+              <span class="footer-logo-text">The Cubeology</span>
+            </div>
+            <p class="footer-desc">
+              India's premier speedcubing platform. Compete, learn, and connect with cubers nationwide.
+            </p>
+            <div class="footer-social">
+              <a href="https://instagram.com/thecubeology" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.5 6.5h.01" />
+                </svg>
+              </a>
+              <a href="https://youtube.com/@thecubeology" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-links-col">
+            <h4 class="footer-title">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="/competitions/">All Competitions</a></li>
+              <li><a href="/rankings/">Rankings</a></li>
+              <li>
+                <a href="https://api.whatsapp.com/send?phone=7439383737&text=Hey%2C%20I%20want%20to%20know%20about%201%20on%201%20Speedcubing%20Coaching."
+                   target="_blank" rel="noopener">Learn (1 on 1 Coaching)</a>
+              </li>
+              <li><a href="https://thecubeology.com" target="_blank" rel="noopener">Shop</a></li>
+            </ul>
+
+            <div style="margin-top:1.25rem;">
+              <a class="btn btn-secondary" href="mailto:info@thecubeology.com">Contact Us</a>
+            </div>
+          </div>
+
+          <div class="footer-links-col">
+            <h4 class="footer-title">Competition</h4>
+            <ul class="footer-links">
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#dates">Dates</a></li>
+              <li><a href="#rules">Rules</a></li>
+              <li><a href="#fees">Register</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom">
+          <p class="footer-copyright">© 2026 The Cubeology. All rights reserved. Cubing Clash 3.0</p>
+          <div class="footer-cta-area" id="footerCtas"></div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Sticky Register CTA -->
+  <a href="#"
+     id="stickyRegisterBtn"
+     class="btn btn-primary sticky-register-btn"
+     aria-label="Register Now">
+    Register Now
+  </a>
+
+  <!-- Scripts -->
+  <script src="cc2026.js"></script>
+
+  <!-- Registration activity toast -->
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>CC2026 • Dashboard</title>
+
+  <!-- Home theme -->
+  <link rel="stylesheet" href="../cc2026.css">
+  <!-- Dashboard overrides -->
+  <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body class="cc2026">
+  <div class="db-shell">
+    <a class="db-back" href="../">← Back to CC2026</a>
+
+    <!-- If email not linked to profile, JS shows only this block -->
+    <div id="linkError" class="db-card db-card--error" hidden>
+      <div class="db-card__title">Your mail id is not linked with any profile</div>
+      <div class="db-card__sub">Please link your email with a Cubeology profile to access the dashboard.</div>
+      <a class="db-btn db-btn--gold" href="/auth/login" rel="noreferrer">Go to Account Linking</a>
+    </div>
+
+    <div id="dashRoot" hidden>
+      <div class="db-hero db-card">
+        <div class="db-hero__left">
+          <div id="helloLine" class="db-hello">Hey <span id="helloName" class="db-hello__name"></span><span id="helloEmoji" class="db-hello__emoji"> 👋</span></div>
+
+          <div class="db-actions">
+            <a id="btnRules" class="db-btn db-btn--ghost" href="/cc2026/#format">Read Rules</a>
+            <a id="btnDiscord" class="db-btn db-btn--ghost" href="#" target="_blank" rel="noreferrer" style="display:none">Join Discord</a>
+            <a id="btnContact" class="db-btn db-btn--ghost" href="mailto:info@thecubeology.com">Contact Organizer</a>
+            <a id="btnRegister" class="db-btn db-btn--gold" href="https://rzp.io/rzp/cc2026" target="_blank" rel="noreferrer">Register Now</a>
+          </div>
+        </div>
+
+        <div class="db-hero__right">
+          <div class="db-count">
+            <div class="db-count__label">Prelims</div>
+            <div class="db-count__meta">10/04/2026 00:00 IST</div>
+          </div>
+          <div class="db-count">
+            <div class="db-count__label">Countdown</div>
+            <div id="cdTimer" class="db-count__timer">—</div>
+          </div>
+
+          <div class="db-badges">
+            <span id="regBadge" class="db-badge db-badge--neutral">Checking…</span>
+            <button id="btnLogout" class="db-link">Logout</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="db-tabs">
+        <button id="tabBtn-overview" class="db-tab isActive" data-tab="overview">Overview</button>
+        <button id="tabBtn-referrals" class="db-tab" data-tab="referrals">Referrals</button>
+        <button id="tabBtn-announcements" class="db-tab" data-tab="announcements">Announcements</button>
+      </div>
+
+      <div class="db-panels">
+        <!-- OVERVIEW -->
+        <section id="tab-overview" class="db-panel isActive">
+          <div class="db-grid2">
+            <div class="db-card">
+              <div class="db-card__title">Registration status</div>
+              <div id="statusText" class="db-big">—</div>
+              <div class="db-meta">
+                <span id="ageCat" class="db-pill" style="display:none"></span>
+                <span id="category" class="db-pill" style="display:none"></span>
+              </div>
+            </div>
+
+            <div class="db-card">
+              <div class="db-card__title">Your registered events</div>
+              <div id="eventsChips" class="db-chips"></div>
+              <div class="db-muted">Format: <strong>Prelims → Playoffs → Finals</strong></div>
+            </div>
+          </div>
+
+          <div id="lock-overview" class="db-lock" hidden>
+            <div class="db-lock__inner">
+              <div class="db-lock__title">🔒 Register now to unlock the full dashboard</div>
+              <div class="db-lock__sub">After registration, you’ll get access to Discord link, Announcements and full features.</div>
+              <a id="lockRegister1" class="db-btn db-btn--gold" href="#" target="_blank" rel="noreferrer">Register Now</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- REFERRALS -->
+        <section id="tab-referrals" class="db-panel">
+          <div class="db-grid2 db-grid2--ref">
+            <div class="db-card">
+              <div class="db-card__title">Your referral count</div>
+              <div id="refCount" class="db-refCount">0</div>
+              <div class="db-muted">Only the <strong>highest slab</strong> prize you unlock will be sent (not all unlocked prizes).</div>
+
+              <div class="refbar" aria-label="Referral progress">
+                <div class="refbar__track">
+                  <div id="refFill" class="refbar__fill"></div>
+
+                  <!-- milestone tick lines -->
+                  <div class="refbar__tickline" data-val="3" aria-hidden="true"></div>
+                  <div class="refbar__tickline" data-val="6" aria-hidden="true"></div>
+                  <div class="refbar__tickline" data-val="10" aria-hidden="true"></div>
+                  <div class="refbar__tickline" data-val="15" aria-hidden="true"></div>
+                </div>
+
+                <div class="refbar__ticks" aria-hidden="true">
+                  <span class="refbar__tick" data-val="3">3</span>
+                  <span class="refbar__tick" data-val="6">6</span>
+                  <span class="refbar__tick" data-val="10">10</span>
+                  <span class="refbar__tick" data-val="15">15</span>
+                </div>
+              </div>
+
+              <div class="db-ms">
+                <div class="db-msRow">
+                  <div>
+                    <div class="db-msRow__h">3 referrals</div>
+                    <div class="db-muted">QiYi Warrior 3×3 UV</div>
+                  </div>
+                  <span id="ms3" class="db-msPill">Need 3 more</span>
+                </div>
+                <div class="db-msRow">
+                  <div>
+                    <div class="db-msRow__h">6 referrals</div>
+                    <div class="db-muted">Dayan Guhong Pro+ 55mm (Spring Version)</div>
+                  </div>
+                  <span id="ms6" class="db-msPill">Need 6 more</span>
+                </div>
+                <div class="db-msRow">
+                  <div>
+                    <div class="db-msRow__h">10 referrals</div>
+                    <div class="db-muted">Apex RSMV5 Ball Core</div>
+                  </div>
+                  <span id="ms10" class="db-msPill">Need 10 more</span>
+                </div>
+                <div class="db-msRow">
+                  <div>
+                    <div class="db-msRow__h">15 referrals</div>
+                    <div class="db-muted">GAN V100 Leap Horse Edition</div>
+                  </div>
+                  <span id="ms15" class="db-msPill">Need 15 more</span>
+                </div>
+              </div>
+
+              <div class="db-muted" style="margin-top:10px">Highest referrer prize is separate and will be decided by organizers.</div>
+            </div>
+
+            <div class="db-card">
+              <div class="db-card__title">Share your referral</div>
+              <div class="db-muted">Ask your friend to write your <strong>Name</strong> in the <strong>Referred By</strong> column while registering.</div>
+
+              <label class="db-label" for="refMsg">Message (copy)</label>
+              <textarea id="refMsg" class="db-textarea" rows="10" readonly></textarea>
+              <div class="db-row">
+                <button id="copyMsg" class="db-btn db-btn--ghost" type="button">Copy Message</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ANNOUNCEMENTS -->
+        <section id="tab-announcements" class="db-panel">
+          <div id="lock-announcements" class="db-lock" hidden>
+            <div class="db-lock__inner">
+              <div class="db-lock__title">🔒 Register now to unlock announcements</div>
+              <div class="db-lock__sub">You’ll see important updates here after you register.</div>
+              <a id="lockRegister2" class="db-btn db-btn--gold" href="#" target="_blank" rel="noreferrer">Register Now</a>
+            </div>
+          </div>
+
+          <div class="db-card">
+            <div class="db-card__title">Announcements</div>
+            <div id="annHint" class="db-muted">Loading…</div>
+            <div id="annList" class="db-ann"></div>
+          </div>
+        </section>
+      </div>
+
+      <div id="toast" class="db-toast"></div>
+    </div>
+  </div>
+
+  <!-- Supabase + config (your config.js lives in /js/config.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="./dashboard.js"></script>
+</body>
+</html>

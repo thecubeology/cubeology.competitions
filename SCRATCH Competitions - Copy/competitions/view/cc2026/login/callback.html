@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signing in… • CC2026</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/config.js"></script>
+
+  <style>
+    :root{ color-scheme: dark; }
+    html,body{ height:100%; margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body{ background:linear-gradient(180deg,#050505,#0a0a0a); color:#fff; display:flex; align-items:center; justify-content:center; padding:20px; }
+    .card{ width:min(560px,100%); border:1px solid rgba(255,215,0,0.18); border-radius:22px; background:linear-gradient(145deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)); padding:18px; }
+    h1{ margin:0 0 8px; font-size:22px; font-weight:950; }
+    .muted{ color:rgba(255,255,255,0.72); font-weight:750; line-height:1.35; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Signing you in…</h1>
+    <div class="muted" id="hint">Finalizing session…</div>
+  </div>
+
+  <script>
+    (async function(){
+      const hint = document.getElementById("hint");
+      const sb = window.supabase.createClient(window.CB.SUPABASE_URL, window.CB.SUPABASE_KEY);
+
+      function safeReturn(raw){
+        if(!raw) return "";
+        try{
+          const u = new URL(raw, location.origin);
+          if(u.origin !== location.origin) return "";
+          return u.toString();
+        }catch(e){ return ""; }
+      }
+
+      await new Promise(r=>setTimeout(r, 200));
+
+      const { data } = await sb.auth.getSession();
+      if(!data || !data.session){
+        hint.textContent = "No session found. Sending you back…";
+        location.replace("./");
+        return;
+      }
+
+      // Ensure profile exists (same pattern as main site)
+      try{
+        const { data: udata } = await sb.auth.getUser();
+        const user = udata?.user;
+        const email = (user?.email || "").toLowerCase();
+        if(email){
+          const { data: prof } = await sb.from("profiles").select("email,user_id,player_id,player_name,role").eq("email", email).maybeSingle();
+          if(!prof){
+            await sb.from("profiles").insert([{ email, user_id: user.id, role:"user" }]);
+          }else if(prof && !prof.user_id){
+            await sb.from("profiles").update({ user_id: user.id }).eq("email", email);
+          }
+        }
+      }catch(_e){}
+
+      let target = "";
+      try{ target = safeReturn(localStorage.getItem("cb_return_to") || ""); }catch(_e){}
+      if(!target) target = new URL("../", location.href).toString();
+      try{ localStorage.removeItem("cb_return_to"); }catch(_e){}
+
+      hint.textContent = "Done. Redirecting…";
+      location.replace(target);
+    })();
+  </script>
+</body>
+</html>

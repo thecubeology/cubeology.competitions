@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login • CC2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./login.css" />
+  <link rel="stylesheet" href="login.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Try common config locations (any 404 is fine) -->
+  <script src="../js/config.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="config.js"></script>
+</head>
+
+<body>
+  <a class="back" href="../" aria-label="Back to CC2026">← Back</a>
+
+  <main class="wrap">
+    <section class="card" aria-label="Sign in">
+      <h1 id="title">Sign in</h1>
+      <p class="sub">Use password, OTP (magic link), or Google.</p>
+
+      <div class="tabs" aria-label="Mode">
+        <button class="tab on" type="button" data-mode="signin">Sign in</button>
+        <button class="tab" type="button" data-mode="signup">Sign up</button>
+      </div>
+
+      <div class="tabs" aria-label="Method" style="margin-top:10px">
+        <button class="tab on" type="button" data-method="password">Password</button>
+        <button class="tab" type="button" data-method="otp">OTP / Magic link</button>
+      </div>
+
+      <form id="formAuth" class="form">
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+        </div>
+
+        <div id="passwordField">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+
+        
+        <div id="otpVerify" style="display:none">
+          <label for="otpCode">Enter OTP</label>
+          <input id="otpCode" type="text" inputmode="numeric" placeholder="6-digit OTP" autocomplete="one-time-code" />
+          <button id="btnVerifyOtp" class="btn primary" type="button" style="width:100%;margin-top:10px">Verify OTP</button>
+        </div>
+
+        <div id="otpHint" class="msg" style="display:none">
+          We’ll email you an OTP / magic link. Open it to finish sign-in.
+        </div>
+
+        <div class="row">
+          <button id="primaryBtn" class="btn primary" type="submit">Sign in</button>
+          <button id="btnGoogle" class="btn" type="button">Continue with Google</button>
+        </div>
+
+        <div id="msg" class="msg" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>

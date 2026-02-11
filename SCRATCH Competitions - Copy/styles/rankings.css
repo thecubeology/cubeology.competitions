@@ -1,0 +1,931 @@
+/* =========================================================
+   Rankings — FULL FINAL CSS (COMPLETED)
+   Fixes:
+   - Event pills (chips) look correct + wrap cleanly
+   - H2H layout + sets view stable (single scroller)
+   - Mobile rank inline: "#1 Player Name"
+   - Hide player IDs everywhere
+   - Force bold everywhere
+   - Show-solves 5 solves stretch full width (desktop + mobile)
+   - Mobile: competition name smaller
+   - Mobile stats/hero not pushed to right
+   - Participant name slightly golden everywhere + bigger on mobile
+   ========================================================= */
+
+/* ---------- FORCE BOLD EVERYWHERE ---------- */
+html, body, body * { font-weight: 900 !important; }
+
+/* ---------- HIDE PLAYER ID EVERYWHERE ---------- */
+.rkPlayerId,
+.playerId,
+.personId,
+.h2hPlayerId,
+.preId { display: none !important; }
+
+/* ---------- DESKTOP: NO HAMBURGER ---------- */
+@media (min-width: 900px){
+  .burgerBtn, .drawer, .drawerOverlay { display: none !important; }
+}
+
+/* ---------- WRAPPER ---------- */
+.rkWrap{ padding-top: 14px; }
+
+/* =========================================================
+   GLOBAL NAME STYLING (GOLDEN)
+   ========================================================= */
+:root{
+  --rk-gold: #b8870b; /* slight golden */
+}
+
+/* Rankings table / persons list */
+.rkCellPlayer a,
+.rkListNameCell a{
+  color: var(--rk-gold) !important;
+}
+
+/* H2H + Prelims names */
+.h2hName a,
+.h2hCompareName a,
+.preName a{
+  color: var(--rk-gold) !important;
+}
+
+/* Keep winner/loser colors stronger than gold (override) */
+.h2hName.win, .h2hName.win a,
+.h2hCompareName.win, .h2hCompareName.win a { color:#0a7a2f !important; }
+.h2hName.lose, .h2hName.lose a,
+.h2hCompareName.lose, .h2hCompareName.lose a { color:#c20e0e !important; }
+
+/* =========================================================
+   HERO / STATS
+   ========================================================= */
+.rkHero{ padding: 16px; }
+.rkHeroTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+}
+.rkTitle{ font-size:34px; margin:0; }
+.rkSub{ color:rgba(0,0,0,.65); margin-top:6px; }
+
+.rkStats{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(110px,1fr));
+  gap:10px;
+}
+.rkStat{
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:14px;
+  padding:10px 12px;
+  background:linear-gradient(180deg, rgba(124,58,237,.08), rgba(124,58,237,.02));
+}
+.rkStatLabel{ font-size:12px; color:rgba(0,0,0,.6); }
+.rkStatValue{ font-size:18px; }
+
+/* =========================================================
+   TABS
+   ========================================================= */
+.rkTabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:10px;
+}
+.rkTab{
+  border:1px solid rgba(0,0,0,.15);
+  border-radius:14px;
+  padding:9px 14px;
+  background:#fff;
+  cursor:pointer;
+}
+.rkTab.on{
+  border-color:rgba(124,58,237,.45);
+  background:linear-gradient(180deg, rgba(124,58,237,.14), rgba(124,58,237,.03));
+  box-shadow:0 10px 22px rgba(124,58,237,.12);
+}
+.rkPanel{ display:none; }
+.rkPanel.on{ display:block; }
+
+/* =========================================================
+   CONTROLS
+   ========================================================= */
+.rkControls{ padding:14px; }
+.rkControlsRow{
+  display:flex;
+  gap:16px;
+  align-items:flex-end;
+  flex-wrap:wrap;
+}
+.rkControlsRow2{
+  margin-top:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.rkBlock{ min-width: 220px; flex: 1 1 260px; }
+.rkEventBlock{ flex: 2 1 420px; min-width: 320px; }
+.rkModeBlock{ flex: 0 0 auto; min-width: 220px; }
+.rkSearchBlock{ flex: 2 1 320px; min-width: 280px; }
+
+.rkLabel{ font-size:12px; color:rgba(0,0,0,.6); margin-bottom:6px; }
+.rkSelect, .rkSearch{
+  width:100%;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(0,0,0,.15);
+  background:#fff;
+}
+
+.rkMetaLine{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+.rkMetaStrong{ font-size:20px; }
+.rkMetaMuted{ color:rgba(0,0,0,.6); }
+.rkSmall{ color:rgba(0,0,0,.6); font-size:12px; }
+.rkMiniSelect{
+  padding:8px 10px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.15);
+  background:#fff;
+}
+
+/* =========================================================
+   EVENT PILLS (FIXED)
+   ========================================================= */
+.rkChips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:10px;
+}
+.rkChip{
+  appearance:none;
+  border:1px solid rgba(0,0,0,.16);
+  border-radius:999px;
+  padding:8px 12px;
+  background:#fff;
+  cursor:pointer;
+  line-height:1;
+  white-space:nowrap;
+}
+.rkChip.on{
+  border-color:rgba(124,58,237,.45);
+  background:linear-gradient(180deg, rgba(124,58,237,.14), rgba(124,58,237,.03));
+  box-shadow:0 10px 22px rgba(124,58,237,.10);
+}
+
+/* Mode buttons */
+.rkMode{ display:flex; gap:10px; flex-wrap:wrap; }
+.rkModeBtn{
+  appearance:none;
+  padding:9px 14px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.15);
+  background:#fff;
+  cursor:pointer;
+}
+.rkModeBtn.on{
+  border-color:rgba(124,58,237,.45);
+  background:linear-gradient(180deg, rgba(124,58,237,.14), rgba(124,58,237,.03));
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+.rkTableWrap{ overflow:hidden; }
+.rkTableHead, .rkRow{
+  display:grid;
+  grid-template-columns:70px 1.4fr 0.8fr 190px 1.2fr;
+  padding:12px;
+  align-items:center;
+}
+.rkTableHead{
+  background:rgba(0,0,0,.04);
+  border-bottom:1px solid rgba(0,0,0,.1);
+}
+.rkRow{ border-bottom:1px solid rgba(0,0,0,.06); }
+.rkRow:nth-child(even){
+  background:linear-gradient(90deg, rgba(124,58,237,.05), transparent);
+}
+
+/* cells */
+.rkCellRank{ font-size:16px; }
+.rkCellPlayer{ display:flex; flex-direction:column; gap:2px; }
+.rkCellPlayer a{ text-decoration:none; }
+.rkCellPlayer a:hover{ text-decoration:underline; }
+
+/* result in purple */
+.rkResult{ font-size:20px; color:rgb(124,58,237); }
+.rkResult.dnf{ color:rgba(0,0,0,.55); }
+
+/* show solves button */
+.rkShowSolves{
+  padding:10px 14px;
+  border-radius:14px;
+  border:1px solid rgba(124,58,237,.35);
+  background:linear-gradient(180deg, rgba(124,58,237,.12), rgba(124,58,237,.02));
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+/* solves wrapper */
+.rkSolvesWrap{
+  grid-column:1/-1;
+  margin-top:10px;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(0,0,0,.1);
+  background:#fafafa;
+  width:100%;
+}
+
+/* IMPORTANT: stretch to full width (no cramped scroller) */
+.rkSolvesScroll{ overflow-x: visible; }
+.rkSolvesRow{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(5, minmax(0, 1fr));
+  gap:10px;
+}
+.rkSolve{
+  min-width:0;
+  width:100%;
+  text-align:center;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.15);
+  font-size:14px;
+}
+.rkSolve.best{ color:#0a7a2f !important; }
+.rkSolve.worst{ color:#c20e0e !important; }
+
+/* =========================================================
+   PERSONS LIST
+   ========================================================= */
+.rkList{ overflow:hidden; }
+.rkListHead{
+  display:grid;
+  grid-template-columns:1fr;
+  padding:12px;
+  background:rgba(0,0,0,.04);
+  border-bottom:1px solid rgba(0,0,0,.1);
+}
+.rkListBody .rkListRow{
+  display:grid;
+  grid-template-columns:1fr;
+  padding:12px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.rkListRow:nth-child(even){
+  background:linear-gradient(90deg, rgba(124,58,237,.05), transparent);
+}
+.rkListNameCell a{ text-decoration:none; }
+.rkListNameCell a:hover{ text-decoration:underline; }
+
+/* =========================================================
+   COMPETITIONS TAB
+   ========================================================= */
+.rkCompList{ display:flex; flex-direction:column; gap:12px; margin-top:12px; }
+.rkCompCard{
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:16px;
+  background:#fff;
+  padding:14px;
+}
+.rkCompName{ font-size:18px; }
+.rkCompDate{ margin-top:4px; color:rgba(0,0,0,.65); }
+.rkCompActions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+.rkActionBtn{
+  padding:10px 14px;
+  border-radius:14px;
+  border:1px solid rgba(0,0,0,.15);
+  background:#fff;
+  text-decoration:none;
+  color:#111;
+}
+.rkActionBtn.primary{
+  border-color:rgba(124,58,237,.35);
+  background:linear-gradient(180deg, rgba(124,58,237,.12), rgba(124,58,237,.02));
+}
+
+/* =========================================================
+   PAGINATION (BOTTOM)
+   ========================================================= */
+.rkPagerBottom{
+  display:flex;
+  justify-content:center;
+  margin:14px 0;
+}
+.rkPagerBtns{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.rkBtn{
+  padding:9px 14px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.15);
+  background:#fff;
+  cursor:pointer;
+}
+.rkPageInfo{ color:rgba(0,0,0,.65); padding:0 6px; }
+
+/* =========================================================
+   H2H
+   ========================================================= */
+.rkMetaLineH2H{ margin-top:10px; }
+.rkH2HList{ display:flex; flex-direction:column; gap:12px; margin-top:12px; }
+
+.h2hCard{
+  padding:14px;
+  border-radius:16px;
+  border:1px solid rgba(0,0,0,.1);
+  background:#fff;
+}
+
+.h2hTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.h2hRound{ color:rgba(0,0,0,.75); font-size:14px; }
+
+.h2hToggleSets{
+  padding:10px 14px;
+  border-radius:14px;
+  border:1px solid rgba(124,58,237,.35);
+  background:linear-gradient(180deg, rgba(124,58,237,.12), rgba(124,58,237,.02));
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+.h2hSummary{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:14px;
+}
+
+.h2hName{
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.h2hScore{
+  font-size:28px;
+  letter-spacing:0.5px;
+}
+.h2hScore .win{ color:#0a7a2f !important; }
+.h2hScore .lose{ color:#c20e0e !important; }
+.h2hScore .mid{ color:rgba(0,0,0,.6); padding:0 8px; }
+
+.h2hSets{
+  display:none;
+  margin-top:12px;
+  border-top:1px solid rgba(0,0,0,.08);
+  padding-top:12px;
+}
+.h2hSets.on{ display:block; }
+
+.h2hSet{ margin-bottom:14px; }
+.h2hSetTitle{ font-size:14px; color:rgba(0,0,0,.75); margin-bottom:8px; }
+
+/* SINGLE scroller for BOTH players */
+.h2hCompareScroll{ overflow-x:auto; }
+.h2hCompareInner{ min-width:760px; }
+
+.h2hCompareRow{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:12px;
+  align-items:center;
+  padding:6px 0;
+}
+
+.h2hCompareName{
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.h2hCompareTimes{
+  display:flex;
+  gap:10px;
+  width:max-content;
+}
+
+.h2hTime{
+  min-width:90px;
+  text-align:center;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.15);
+}
+.h2hTime.win{ color:#0a7a2f !important; }
+.h2hTime.lose{ color:#c20e0e !important; }
+
+/* =========================================================
+   PRELIMS (thin rows)
+   ========================================================= */
+.preCard{
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:16px;
+  background:#fff;
+  padding:12px 14px;
+}
+.preCard.qualified{
+  background:linear-gradient(180deg, rgba(10,122,47,.10), rgba(10,122,47,.02));
+  border-color:rgba(10,122,47,.35);
+}
+.preTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.preResult{ font-size:20px; color:rgb(124,58,237); }
+.preActions{ margin-top:8px; }
+.preActions .h2hToggleSets{ padding:9px 12px; }
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width:560px){
+
+  /* HERO: stop right-margin push + center nicely */
+  .rkHero{ padding: 14px !important; }
+  .rkHeroTop{
+    flex-direction:column;
+    align-items:stretch;
+    gap:12px;
+  }
+  .rkStats{
+    width:100%;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:10px;
+  }
+  .rkStat{ padding:10px 10px; }
+
+  /* Controls spacing */
+  .rkControlsRow{ gap:12px; }
+  .rkBlock{ min-width:100%; }
+
+  /* Hide table head */
+  .rkTableHead{ display:none; }
+
+  /* Row becomes compact 2-col */
+  .rkRow{
+    grid-template-columns:1fr auto;
+    gap:10px;
+    padding:12px;
+  }
+
+  /* Rank inline: "#1 Player Name" (expects data-rank like "#1") */
+  .rkCellRank{ display:none; }
+  .rkCellPlayer{
+    flex-direction:row;
+    align-items:center;
+    gap:8px;
+  }
+  .rkCellPlayer::before{
+    content: attr(data-rank);
+    font-size:16px;
+    white-space:nowrap;
+    color:#111;
+  }
+
+  /* Player name bigger on mobile (all lists) */
+  .rkCellPlayer a,
+  .rkListNameCell a,
+  .h2hName a,
+  .h2hCompareName a,
+  .preName a{
+    font-size:16px !important;
+    line-height:1.2 !important;
+  }
+
+  /* Result right */
+  .rkResult{ font-size:22px; text-align:right; }
+
+  /* Competition smaller on mobile */
+  .rkCellComp a,
+  .rkComp a{
+    font-size:13px !important;
+    line-height:1.15 !important;
+  }
+
+  /* Solves full-width feel on mobile */
+  .rkSolvesWrap{
+    margin-left:-12px;
+    margin-right:-12px;
+    border-radius:0;
+    border-left:0;
+    border-right:0;
+  }
+
+  /* Make solve boxes slightly smaller so 5 fits clean */
+  .rkSolve{
+    padding:9px 8px;
+    font-size:13px;
+  }
+
+  /* H2H tighter */
+  .h2hCompareInner{ min-width:640px; }
+  .h2hSummary{ grid-template-columns:1fr auto 1fr; gap:10px; }
+  .h2hScore{ font-size:24px; }
+}
+
+/* =========================================================
+   OVERRIDES ONLY (FINAL)
+   - Participant names: GOLD → BLACK
+   - Show player_id ONLY on Persons tab
+   ========================================================= */
+
+/* 1️⃣ Participant names everywhere → BLACK */
+.rkCellPlayer a,
+.rkListNameCell a,
+.h2hName a,
+.h2hCompareName a,
+.preName a {
+  color: #111 !important;
+}
+
+/* Keep win / lose coloring intact */
+.h2hName.win, .h2hName.win a,
+.h2hCompareName.win, .h2hCompareName.win a {
+  color: #0a7a2f !important;
+}
+.h2hName.lose, .h2hName.lose a,
+.h2hCompareName.lose, .h2hCompareName.lose a {
+  color: #c20e0e !important;
+}
+
+/* 2️⃣ SHOW player_id ONLY in PERSONS tab */
+
+/* Default: hide everywhere */
+.rkPlayerId,
+.playerId,
+.personId,
+.h2hPlayerId,
+.preId {
+  display: none !important;
+}
+
+/* Persons tab specifically */
+.rkPanel[data-panel="persons"] .rkListIdCell {
+  display: block !important;
+  color: #111;
+  opacity: 0.75;
+  font-size: 13px;
+}
+
+/* Ensure Persons list has space for ID */
+.rkPanel[data-panel="persons"] .rkListHead,
+.rkPanel[data-panel="persons"] .rkListRow {
+  grid-template-columns: 90px 1fr;
+}
+
+/* OVERRIDE: Persons tab shows ID column */
+#panel-persons .rkListRow{
+  display:grid;
+  grid-template-columns: 90px 1fr;
+  gap:10px;
+  align-items:center;
+}
+
+#panel-persons .rkListIdCell{
+  display:block !important;
+  color:#111;
+  opacity:.75;
+  font-size:13px;
+}
+
+/* ==============================
+   PERSONS TAB – ID SIZE & ALIGN
+   ============================== */
+
+/* Header: ID */
+.rkPersonsIdHead {
+  text-align: right;
+  font-size: 15px;          /* ⬆ bigger */
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+/* Row: ID */
+#panel-persons .rkListIdCell {
+  text-align: right;
+  font-size: 16px;          /* ⬆ bigger than header */
+  font-weight: 900;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   ✅ HOME-CLEAN GLOBAL THEME OVERRIDES (applied across pages)
+   - Keeps your existing selectors + logic intact
+   - Unifies tokens so all pages instantly match the home-clean vibe
+========================================================= */
+:root{
+  --ink:#0f172a;
+  --muted: rgba(15,23,42,.68);
+  --line-soft: rgba(15,23,42,.10);
+  --line: rgba(15,23,42,.14);
+
+  --bg:#f7f9fc;
+  --surface:#ffffff;
+  --surface2:#fbfbfd;
+
+  --shadow: 0 16px 40px rgba(15,23,42,.10);
+  --shadow2: 0 8px 22px rgba(15,23,42,.10);
+
+  --r:22px;
+  --r2:16px;
+
+  --violet:#6d28d9;
+  --cyan:#0891b2;
+  --pink:#db2777;
+
+  --goldBg: rgba(255,247,220,.92);
+  --goldBd: rgba(184,134,11,.22);
+  --goldTx: #7a5a10;
+
+  --amberBg: rgba(245,158,11,.16);
+  --amberBd: rgba(245,158,11,.30);
+  --amberTx: #8a5a00;
+
+  --greenBg: rgba(22,163,74,.12);
+  --greenBd: rgba(22,163,74,.22);
+  --greenTx: #14532d;
+
+  --purpleBg: rgba(109,40,217,.10);
+  --purpleBd: rgba(109,40,217,.22);
+
+  --pinkBg: rgba(219,39,119,.10);
+  --pinkBd: rgba(219,39,119,.20);
+
+  --cyanBg: rgba(14,165,233,.10);
+  --cyanBd: rgba(14,165,233,.20);
+}
+
+/* Global base feel */
+html, body{
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Keep your bold-heavy aesthetic consistent */
+body, body *{
+  letter-spacing: .02px;
+}
+
+/* Generic cards/buttons/pills fallback (non-destructive) */
+.card, .panel, .box,
+.detailCard, .rulesCard,
+.cvCard, .rkCard, .resCard,
+.psCard{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow2);
+}
+
+.btn, button, .button, .rkTab, .resChip, .rkChip, .psBtn{
+  border-radius: 14px;
+}
+
+.pill, .chip, .rkChip, .resChip{
+  border-radius: 999px;
+}
+
+
+/* =========================================================
+   ✅ HOME-CLEAN THEME — STRONG OVERRIDES (V3)
+   Purpose: make the change UNMISSABLE even if other CSS wins.
+   - Uses !important on tokens + base elements
+   - Gives a very clear background + card style
+========================================================= */
+:root{
+  --ink:#0f172a !important;
+  --muted: rgba(15,23,42,.68) !important;
+  --line-soft: rgba(15,23,42,.10) !important;
+  --line: rgba(15,23,42,.14) !important;
+
+  /* UNMISSABLE page background */
+  --bg:#f7f9fc !important;
+  --surface:#ffffff !important;
+  --surface2:#fbfbfd !important;
+
+  --shadow: 0 16px 40px rgba(15,23,42,.10) !important;
+  --shadow2: 0 8px 22px rgba(15,23,42,.10) !important;
+
+  --r:22px !important;
+  --r2:16px !important;
+
+  --violet:#6d28d9 !important;
+  --cyan:#0891b2 !important;
+  --pink:#db2777 !important;
+
+  /* map hc vars so if any page uses them, it still matches */
+  --hc-bg: var(--bg) !important;
+  --hc-card: var(--surface) !important;
+  --hc-text: var(--ink) !important;
+  --hc-muted: #52627a !important;
+  --hc-accent: #2563eb !important;
+  --hc-accent2: var(--violet) !important;
+  --hc-yellow: #ffd400 !important;
+  --hc-gold: #d7b100 !important;
+  --hc-border: rgba(15, 23, 42, 0.10) !important;
+  --hc-shadow: 0 8px 24px rgba(2, 6, 23, 0.08) !important;
+  --hc-radius: 18px !important;
+}
+
+/* Force background + base typography */
+html, body{ background: var(--bg) !important; color: var(--ink) !important; }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji" !important;
+}
+
+/* Force common containers to look like home-clean */
+.container, .wrap, .shell, .page, .main, .rkWrap, .resWrap, .psPage, .cvShell{
+  background: transparent !important;
+}
+
+/* Force cards across your app */
+.card, .panel, .box,
+.detailCard, .rulesCard,
+.cvCard, .rkCard, .resCard,
+.psCard,
+.controlsCard, .featuredCard,
+.compCard, .wideSliderArea,
+.psCompCard, .psH2HMatch,
+.rkTableWrap, .rkList, .resTableWrap{
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--shadow2) !important;
+}
+
+/* Buttons */
+.btn, button, .button, a.btn, input[type="button"], input[type="submit"]{
+  border-radius: 14px !important;
+  border: 1px solid rgba(15,23,42,.14) !important;
+  background: rgba(255,255,255,.92) !important;
+  color: var(--ink) !important;
+  box-shadow: 0 10px 18px rgba(2,6,23,.06) !important;
+}
+.btn.primary, button.primary, .button.primary{
+  background: linear-gradient(135deg, rgba(37,99,235,.92), rgba(109,40,217,.90)) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* Pills/Chips */
+.pill, .chip, .rkChip, .resChip, .psPill, .psChip, .hc-pill, .hc-chip{
+  border-radius: 999px !important;
+  border: 1px solid rgba(15,23,42,.14) !important;
+  background: rgba(15,23,42,.04) !important;
+  color: rgba(15,23,42,.92) !important;
+}
+.pill.registered{ background: rgba(22,163,74,.12) !important; border-color: rgba(22,163,74,.22) !important; color: #14532d !important; }
+.pill.closed{ background: rgba(239,68,68,.10) !important; border-color: rgba(239,68,68,.22) !important; color: #7f1d1d !important; }
+
+/* Headings get tighter tracking like home-clean */
+h1, h2, h3{ letter-spacing: -0.02em !important; }
+
+/* Optional: subtle top glow so you can instantly tell CSS loaded */
+body::before{
+  content:"";
+  position: fixed;
+  left:0; right:0; top:0;
+  height: 240px;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(37,99,235,.10), transparent 55%),
+    radial-gradient(900px 240px at 85% 0%, rgba(109,40,217,.10), transparent 55%);
+  z-index: 0;
+}
+/* keep page content above glow */
+body > *{ position: relative; z-index: 1; }
+
+/* =========================================================
+   HOME-CLEAN THEME OVERLAY (NON-DESTRUCTIVE) — GLOBAL
+   - Appended to the existing page CSS
+   - DOES NOT remove/replace any prior rules, only overrides visuals
+   - Keeps all existing selectors/classes/IDs intact (NO logic changes)
+========================================================= */
+
+/* Map to home-clean tokens (with safe fallbacks) */
+:root{
+  --hc-bg: var(--hc-bg, #f7f9fc);
+  --hc-card: var(--hc-card, #ffffff);
+  --hc-text: var(--hc-text, #0f172a);
+  --hc-muted: var(--hc-muted, #52627a);
+  --hc-accent: var(--hc-accent, #2563eb);
+  --hc-accent2: var(--hc-accent2, #6d28d9);
+  --hc-yellow: var(--hc-yellow, #ffd400);
+  --hc-gold: var(--hc-gold, #d7b100);
+  --hc-border: var(--hc-border, rgba(15, 23, 42, 0.10));
+  --hc-shadow: var(--hc-shadow, 0 8px 24px rgba(2, 6, 23, 0.08));
+}
+
+/* Page base */
+html, body{
+  background: var(--hc-bg) !important;
+  color: var(--hc-text) !important;
+}
+
+/* Subtle top glow like home-clean */
+body::before{
+  content:"";
+  position: fixed;
+  left:0; right:0; top:0;
+  height: 240px;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(37,99,235,.10), transparent 55%),
+    radial-gradient(900px 240px at 85% 0%, rgba(109,40,217,.10), transparent 55%);
+  z-index: 0;
+}
+body > *{ position: relative; z-index: 1; }
+
+/* Generic card surfaces (covers your page cards without needing HTML edits) */
+.card,
+.rkHero, .rkTabs, .rkControls, .rkTableWrap,
+.resHero, .resControls, .resTableWrap,
+.rulesCard,
+.psCard, .psTabsCard{
+  background: rgba(255,255,255,.90) !important;
+  border: 1px solid var(--hc-border) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--hc-shadow) !important;
+}
+
+/* Inputs / selects */
+input, select, textarea,
+.rkSelect, .rkSearch, .rkMiniSelect,
+.resSelect, .resSearch, .resMiniSelect{
+  background:#fff !important;
+  border: 1px solid rgba(15,23,42,.14) !important;
+  border-radius: 14px !important;
+}
+
+/* Chips / pills — home-clean vibe */
+.pill, .chip,
+.rkChip, .resChip,
+.psPill, .psChip,
+.rkModeBtn, .rkTab,
+.psTab, .psModeBtn{
+  border-radius: 999px !important;
+}
+
+.rkChip.on, .resChip.on, .rkModeBtn.on{
+  background: linear-gradient(90deg, var(--hc-accent), var(--hc-accent2)) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: 0 10px 22px rgba(37,99,235,.16) !important;
+}
+
+/* Buttons */
+.btn, .rkBtn, .resBtn, .rkShowSolves, .resShowSolves, .psBtn{
+  border-radius: 14px !important;
+  border-color: rgba(15,23,42,.14) !important;
+  box-shadow: 0 10px 18px rgba(2,6,23,.06) !important;
+}
+.btn.primary{
+  background: linear-gradient(90deg, var(--hc-accent), var(--hc-accent2)) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* Section headers accents */
+.rkTitle, .resTitle, .rulesTitle, .psName{
+  letter-spacing: -0.02em !important;
+}
+
+/* Muted text normalization */
+.rkSub, .resSub, .sub, .psCrumbs,
+.rkSmall, .resSmall,
+.rkMetaMuted, .resMetaMuted{
+  color: var(--hc-muted) !important;
+}
+
+/* Tables: softer header + zebra consistent */
+.rkTableHead, .resTableHead{
+  background: rgba(15,23,42,.04) !important;
+  border-bottom: 1px solid rgba(15,23,42,.10) !important;
+}
+.rkRow, .resRow{
+  border-bottom: 1px solid rgba(15,23,42,.06) !important;
+}
+
+
+/* --- Rankings: keep your golden names, just align panels/shadows --- */
+.rkStat{
+  background: linear-gradient(180deg, rgba(37,99,235,.08), rgba(255,255,255,.00)) !important;
+  border-color: rgba(15,23,42,.10) !important;
+}
+.rkResult{ color: var(--hc-accent2) !important; }

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Competitions • Cubeology</title>
+
+  <link rel="stylesheet" href="/styles/theme.css">
+  <link rel="stylesheet" href="/styles/components.css">
+  <link rel="stylesheet" href="/styles/pages.css">
+  <link rel="stylesheet" href="/styles/competitions.css?v=BOLDPILLS2">
+
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/nav.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/competitions.js" defer></script>
+</head>
+
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container nav">
+      <a class="brand brandLink" href="/" aria-label="Go to Home">
+        <div class="brandMark">🏁</div>
+        <div>Cubeology Competitions</div>
+      </a>
+
+      <div class="navlinks">
+        <a href="/">Home</a>
+        <a class="on" href="/competitions/">Competitions</a>
+        <a href="/rankings/">Rankings</a>
+        <a href="/timer/">Timer</a>
+        <a class="btn primary" href="https://thecubeology.com" target="_blank" rel="noopener">Store</a>
+      </div>
+
+      <button class="burgerBtn" type="button" aria-label="Open menu" data-nav-open>
+        <div class="burgerIcon" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawerOverlay" data-nav-overlay></div>
+  <aside class="drawer" data-nav-drawer aria-label="Site menu">
+    <div class="drawerHeader">
+      <div class="drawerBrand">
+        <div class="drawerBrandMark">🏁</div>
+        <div>Menu</div>
+      </div>
+      <button class="drawerClose" type="button" aria-label="Close menu" data-nav-close>✕</button>
+    </div>
+
+    <nav class="drawerLinks">
+      <a href="/"><span>Home</span><span class="hint">Main hub</span></a>
+      <a href="/competitions/"><span>Competitions</span><span class="hint">Upcoming • Ongoing • Past</span></a>
+      <a href="/rankings/"><span>Rankings</span><span class="hint">Results & profiles</span></a>
+      <a href="/timer/"><span>Timer</span><span class="hint">Practice & submit</span></a>
+      <a href="https://thecubeology.com" target="_blank" rel="noopener"><span>Store</span><span class="hint">thecubeology.com</span></a>
+    </nav>
+
+    <div class="drawerFooter">Cubeology Competitions</div>
+  </aside>
+
+  <!-- Page -->
+  <div class="container section">
+    <div id="featuredWrap" class="featuredWrap"></div>
+
+    <!-- Filters -->
+    <div class="controlsCard">
+      <div class="controlsTop">
+        <div class="searchWrap">
+          <input id="searchBox" class="searchInput" type="search"
+                 placeholder="Search by name / ID / events / mode…" autocomplete="off">
+          <button id="clearSearch" class="btn ghost mini" type="button">Clear</button>
+        </div>
+
+        <div class="controlsActions">
+          <button id="filtersBtn" class="btn dark" type="button"
+                  aria-expanded="false" aria-controls="filtersPanel">
+            Filters
+          </button>
+        </div>
+      </div>
+
+      <div id="filtersPanel" class="filtersPanel" hidden>
+        <div class="filtersGrid">
+          <div class="filterBlock">
+            <div class="filterLabel">Registration</div>
+            <div class="chipRow" id="regChips">
+              <button class="chip on" data-reg="any" type="button">Any</button>
+              <button class="chip" data-reg="open" type="button">Open</button>
+              <button class="chip" data-reg="soon" type="button">Starts Soon</button>
+              <button class="chip" data-reg="closed" type="button">Closed</button>
+              <button class="chip" data-reg="soldout" type="button">Sold Out</button>
+            </div>
+          </div>
+
+          <div class="filterBlock">
+            <div class="filterLabel">Event</div>
+            <select id="eventSelect" class="select">
+              <option value="">All events</option>
+            </select>
+          </div>
+
+          <div class="filterBlock">
+            <div class="filterLabel">Mode</div>
+            <select id="modeSelect" class="select">
+              <option value="">All modes</option>
+            </select>
+          </div>
+
+          <div class="filterBlock">
+            <div class="filterLabel">Sort</div>
+            <select id="sortSelect" class="select">
+              <option value="smart">Smart</option>
+              <option value="start_asc">Start date ↑</option>
+              <option value="start_desc">Start date ↓</option>
+              <option value="name_asc">Name A→Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filtersMeta">
+          <div id="metaLine" class="muted"></div>
+          <button id="resetBtn" class="btn ghost mini" type="button">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upcoming + Ongoing -->
+    <div class="twoCols">
+      <section class="colCard">
+        <div class="colHead">
+          <div>
+            <h2 class="colTitle">Upcoming Competitions</h2>
+            <div class="muted">Nearest first</div>
+          </div>
+
+          <div class="headActions">
+            <button id="upcomingViewAll" class="btn ghost mini" type="button">View all</button>
+            <div class="arrowGroup desktopOnly">
+              <button class="arrowBtn" type="button" data-scroll="#upcomingCarousel" data-dir="-1">←</button>
+              <button class="arrowBtn" type="button" data-scroll="#upcomingCarousel" data-dir="1">→</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="upcomingCarousel" class="carousel"></div>
+      </section>
+
+      <section class="colCard">
+        <div class="colHead">
+          <div>
+            <h2 class="colTitle">Ongoing Competitions</h2>
+            <div class="muted">Live now</div>
+          </div>
+
+          <div class="headActions">
+            <button id="ongoingViewAll" class="btn ghost mini" type="button">View all</button>
+            <div class="arrowGroup desktopOnly">
+              <button class="arrowBtn" type="button" data-scroll="#ongoingCarousel" data-dir="-1">←</button>
+              <button class="arrowBtn" type="button" data-scroll="#ongoingCarousel" data-dir="1">→</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="ongoingCarousel" class="carousel"></div>
+      </section>
+    </div>
+
+    <!-- Past -->
+    <section class="colCard" style="margin-top:16px;">
+      <div class="sectionTitleRow">
+        <div>
+          <h2 class="colTitle">Past Competitions</h2>
+          <div class="muted">Latest → Oldest</div>
+        </div>
+
+        <div class="headActions">
+          <div class="arrowGroup desktopOnly">
+            <button class="arrowBtn" type="button" data-scroll="#pastCarousel" data-dir="-1">←</button>
+            <button class="arrowBtn" type="button" data-scroll="#pastCarousel" data-dir="1">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="pastCarousel" class="carousel"></div>
+    </section>
+
+    <div style="height:22px;"></div>
+  </div>
+
+  <footer class="footer footerLight">
+    <div class="container">
+      <div class="footerIconsRow">
+        <a class="iconBtn" href="https://thecubeology.com" target="_blank" rel="noopener" aria-label="Store">🛒</a>
+        <a class="iconBtn" href="/" aria-label="Home">🏁</a>
+        <a class="iconBtn" href="/rankings/" aria-label="Rankings">🏆</a>
+      </div>
+      <div class="muted" style="text-align:center;margin-top:10px;">
+        © Cubeology Competitions
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

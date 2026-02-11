@@ -1,0 +1,835 @@
+/* competition-view.css — CLEAN REDESIGN (updated: Prizes title + no bullet dot UI) */
+
+:root{
+  --bg:#ffffff;
+  --card:#ffffff;
+  --soft:#f7f8fb;
+  --ink:#0b1220;
+  --muted: rgba(11,18,32,.68);
+  --line: rgba(11,18,32,.10);
+
+  --shadow: 0 18px 50px rgba(11,18,32,.10);
+  --shadow2: 0 10px 24px rgba(11,18,32,.08);
+
+  --pink:#db2777;
+  --vio:#6d28d9;
+  --cyan:#0891b2;
+  --amber:#f59e0b;
+  --green:#22c55e;
+
+  --vioBg: rgba(109,40,217,.10);
+  --cyanBg: rgba(8,145,178,.12);
+  --pinkBg: rgba(219,39,119,.10);
+  --amberBg: rgba(245,158,11,.14);
+  --greenBg: rgba(34,197,94,.12);
+
+  --goldBg: rgba(255,247,220,.92);
+  --goldBd: rgba(184,134,11,.22);
+  --goldTx: #7a5a10;
+
+  --radius: 22px;
+}
+
+*{ box-sizing:border-box; }
+
+.cvShell{
+  max-width: 980px;
+  margin: 18px auto;
+  padding: 0 14px;
+}
+
+.cvCard{
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+
+/* ---------- Top header ---------- */
+.cvTop{
+  padding: 16px 16px 12px 16px;
+  border-bottom: 1px solid rgba(11,18,32,.06);
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(109,40,217,.10), transparent 55%),
+    radial-gradient(900px 240px at 90% 0%, rgba(219,39,119,.08), transparent 55%),
+    linear-gradient(180deg, rgba(247,248,251,.85), rgba(255,255,255,.96));
+}
+
+.cvTopRow{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.cvTitle{
+  margin:0;
+  font-size: 30px;
+  line-height:1.06;
+  letter-spacing:-.2px;
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.cvMeta{
+  margin-top:8px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.cvDate{
+  color: var(--pink);
+  font-weight: 800;
+}
+
+.pills{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.75);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing:.3px;
+  text-transform:uppercase;
+  color: var(--ink);
+}
+
+.pill.violet{ background: var(--vioBg); }
+.pill.cyan{ background: var(--cyanBg); }
+.pill.pink{ background: var(--pinkBg); }
+.pill.amber{ background: var(--amberBg); }
+.pill.green{ background: var(--greenBg); }
+
+.cvActions{
+  margin-top: 12px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(11,18,32,.12);
+  background: rgba(255,255,255,.86);
+  color: var(--ink);
+  text-decoration:none;
+  font-weight: 900;
+  box-shadow: 0 10px 18px rgba(11,18,32,.06);
+  transition: transform .12s ease, box-shadow .12s ease;
+  user-select:none;
+}
+.btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 16px 26px rgba(11,18,32,.10);
+}
+.btn:active{ transform: translateY(0px); }
+
+.btn.primary{
+  border-color: rgba(219,39,119,.30);
+  background: linear-gradient(135deg, rgba(219,39,119,.92), rgba(109,40,217,.88));
+  color:#fff;
+}
+
+.btn.ghost{
+  border-color: rgba(11,18,32,.12);
+  background: rgba(247,248,251,.9);
+}
+
+.btn.disabled{
+  opacity:.55;
+  pointer-events:none;
+}
+
+.hook{
+  margin-top: 10px;
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+/* ---------- Banner (optional) ---------- */
+.cvBannerWrap{
+  padding: 14px 16px 0 16px;
+}
+
+.banner{
+  border-radius: 18px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: linear-gradient(135deg, rgba(109,40,217,.06), rgba(219,39,119,.06));
+  overflow:hidden;
+  position:relative;
+  aspect-ratio: 2/1;
+}
+
+.bannerBlur{
+  position:absolute; inset:-12px;
+  background-size: cover;
+  background-position:center;
+  filter: blur(18px);
+  transform: scale(1.08);
+  opacity:.55;
+}
+.bannerTint{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(70% 80% at 15% 20%, rgba(255,255,255,.65) 0%, rgba(255,255,255,.0) 60%),
+    radial-gradient(60% 80% at 85% 40%, rgba(255,255,255,.55) 0%, rgba(255,255,255,.0) 62%),
+    linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.78));
+  pointer-events:none;
+}
+.bannerImg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit: contain;
+  padding: 10px;
+}
+
+/* ---------- Body ---------- */
+.cvBody{
+  padding: 16px;
+}
+
+/* ---------- Info tiles ---------- */
+.tiles{
+  margin-top: 14px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.tile{
+  border: 1px solid rgba(11,18,32,.10);
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: var(--shadow2);
+  padding: 12px 12px;
+  position:relative;
+  overflow:hidden;
+}
+
+.tile::before{
+  content:"";
+  position:absolute;
+  inset:-60px -40px auto auto;
+  width:160px; height:160px;
+  background: radial-gradient(circle at 30% 30%, rgba(109,40,217,.16), rgba(109,40,217,0) 60%);
+  transform: rotate(12deg);
+}
+
+.tileTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  position:relative;
+}
+
+.tileLabel{
+  font-size: 12px;
+  letter-spacing:.35px;
+  text-transform: uppercase;
+  color: rgba(11,18,32,.68);
+  font-weight: 900;
+}
+
+.tileIcon{
+  width:36px; height:36px;
+  border-radius: 14px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(247,248,251,.9);
+  display:grid;
+  place-items:center;
+  font-size: 16px;
+  position:relative;
+}
+
+.tileValue{
+  margin-top: 10px;
+  font-weight: 900;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.22;
+  position:relative;
+}
+
+.tile.gold{
+  border-color: var(--goldBd);
+  background: linear-gradient(180deg, rgba(255,247,220,.92), rgba(255,255,255,.92));
+}
+.tile.gold .tileValue{ color: var(--goldTx); }
+
+/* ---------- Two-column section ---------- */
+.cols{
+  margin-top: 12px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.panel{
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 18px;
+  background:#fff;
+  box-shadow: var(--shadow2);
+  padding: 14px;
+}
+
+.h2{
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  letter-spacing:.35px;
+  text-transform:uppercase;
+  color: rgba(11,18,32,.74);
+  font-weight: 900;
+}
+
+/* Events pills */
+.events{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.eventPill{
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.12);
+  background: var(--soft);
+  font-weight: 900;
+  color: var(--ink);
+}
+
+/* Key details pills */
+.kpills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.kpill{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(11,18,32,.12);
+  background: var(--soft);
+  font-weight: 900;
+}
+.kpill .k{ font-size: 12px; text-transform:uppercase; letter-spacing:.25px; color: rgba(11,18,32,.70); }
+.kpill .v{ color: var(--ink); }
+
+.kpill.violet{ background: var(--vioBg); }
+.kpill.amber{ background: var(--amberBg); }
+.kpill.cyan{ background: var(--cyanBg); }
+.kpill.pink{ background: var(--pinkBg); }
+
+/* ---------- Accordions ---------- */
+.acc{
+  margin-top: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(11,18,32,.10);
+  background:#fff;
+  box-shadow: var(--shadow2);
+  overflow:hidden;
+}
+
+.acc > summary{
+  list-style:none;
+  cursor:pointer;
+  padding: 14px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background: linear-gradient(90deg, rgba(109,40,217,.06), rgba(219,39,119,.05), rgba(8,145,178,.05));
+  border-bottom: 1px solid rgba(11,18,32,.08);
+}
+
+.acc > summary::-webkit-details-marker{ display:none; }
+
+.accLeft{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight: 900;
+  color: var(--ink);
+}
+
+.accIcon{
+  width:34px; height:34px;
+  border-radius: 12px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(247,248,251,.95);
+  display:grid;
+  place-items:center;
+}
+
+.chev{
+  width:38px; height:38px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.92);
+  display:grid;
+  place-items:center;
+  box-shadow: 0 10px 18px rgba(11,18,32,.06);
+  transition: transform .18s ease;
+  position:relative;
+}
+.chev::before{
+  content:"";
+  width:12px; height:12px;
+  border-right:3px solid rgba(11,18,32,.55);
+  border-bottom:3px solid rgba(11,18,32,.55);
+  transform: rotate(45deg);
+  margin-top:-2px;
+}
+.acc[open] .chev{ transform: rotate(180deg); }
+
+.accBody{
+  padding: 14px;
+  color: var(--ink);
+  line-height: 1.65;
+  font-weight: 800;
+}
+
+/* ✅ Rich text without bullets */
+.rt .sec{ margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(11,18,32,.12); }
+.rt .hdr{
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  letter-spacing:.35px;
+  text-transform:uppercase;
+  color: rgba(11,18,32,.78);
+}
+.rt .line{ margin: 7px 0; }
+.rt .tag{
+  display:inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.12);
+  background: var(--soft);
+  margin: 4px 8px 4px 0;
+}
+
+/* Footer actions */
+.footerActions{
+  margin-top: 14px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.note{
+  margin-top: 10px;
+  color: var(--muted);
+  line-height:1.35;
+  font-weight: 800;
+}
+
+.err{
+  border:1px solid rgba(239,68,68,.35);
+  background: rgba(239,68,68,.08);
+  padding:14px;
+  border-radius:18px;
+  font-weight: 900;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 920px){
+  .tiles{ grid-template-columns: 1fr; }
+  .cols{ grid-template-columns: 1fr; }
+  .cvTitle{ font-size: 22px; }
+  .pills{ justify-content:flex-start; }
+  .cvActions{ justify-content:flex-start; }
+}
+
+.mobileBar{ display:none; }
+
+@media (max-width: 720px){
+  .cvBody{ padding-bottom: 92px; }
+  .btn{ width: 100%; }
+  .cvActions{ width:100%; }
+  .footerActions .btn{ width:100%; }
+
+  .mobileBar{
+    display:flex;
+    position: fixed;
+    left:0; right:0; bottom:0;
+    padding: 10px 12px;
+    gap:10px;
+    background: rgba(255,255,255,.92);
+    border-top: 1px solid rgba(11,18,32,.10);
+    backdrop-filter: blur(10px);
+    z-index: 50;
+  }
+  .mobileBar .btn{
+    flex:1;
+    width:auto;
+    padding: 12px 12px;
+    border-radius: 16px;
+  }
+}
+
+
+/* =========================================================
+   ✅ HOME-CLEAN GLOBAL THEME OVERRIDES (applied across pages)
+   - Keeps your existing selectors + logic intact
+   - Unifies tokens so all pages instantly match the home-clean vibe
+========================================================= */
+:root{
+  --ink:#0f172a;
+  --muted: rgba(15,23,42,.68);
+  --line-soft: rgba(15,23,42,.10);
+  --line: rgba(15,23,42,.14);
+
+  --bg:#f7f9fc;
+  --surface:#ffffff;
+  --surface2:#fbfbfd;
+
+  --shadow: 0 16px 40px rgba(15,23,42,.10);
+  --shadow2: 0 8px 22px rgba(15,23,42,.10);
+
+  --r:22px;
+  --r2:16px;
+
+  --violet:#6d28d9;
+  --cyan:#0891b2;
+  --pink:#db2777;
+
+  --goldBg: rgba(255,247,220,.92);
+  --goldBd: rgba(184,134,11,.22);
+  --goldTx: #7a5a10;
+
+  --amberBg: rgba(245,158,11,.16);
+  --amberBd: rgba(245,158,11,.30);
+  --amberTx: #8a5a00;
+
+  --greenBg: rgba(22,163,74,.12);
+  --greenBd: rgba(22,163,74,.22);
+  --greenTx: #14532d;
+
+  --purpleBg: rgba(109,40,217,.10);
+  --purpleBd: rgba(109,40,217,.22);
+
+  --pinkBg: rgba(219,39,119,.10);
+  --pinkBd: rgba(219,39,119,.20);
+
+  --cyanBg: rgba(14,165,233,.10);
+  --cyanBd: rgba(14,165,233,.20);
+}
+
+/* Global base feel */
+html, body{
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Keep your bold-heavy aesthetic consistent */
+body, body *{
+  letter-spacing: .02px;
+}
+
+/* Generic cards/buttons/pills fallback (non-destructive) */
+.card, .panel, .box,
+.detailCard, .rulesCard,
+.cvCard, .rkCard, .resCard,
+.psCard{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow2);
+}
+
+.btn, button, .button, .rkTab, .resChip, .rkChip, .psBtn{
+  border-radius: 14px;
+}
+
+.pill, .chip, .rkChip, .resChip{
+  border-radius: 999px;
+}
+
+
+/* =========================================================
+   ✅ HOME-CLEAN THEME — STRONG OVERRIDES (V3)
+   Purpose: make the change UNMISSABLE even if other CSS wins.
+   - Uses !important on tokens + base elements
+   - Gives a very clear background + card style
+========================================================= */
+:root{
+  --ink:#0f172a !important;
+  --muted: rgba(15,23,42,.68) !important;
+  --line-soft: rgba(15,23,42,.10) !important;
+  --line: rgba(15,23,42,.14) !important;
+
+  /* UNMISSABLE page background */
+  --bg:#f7f9fc !important;
+  --surface:#ffffff !important;
+  --surface2:#fbfbfd !important;
+
+  --shadow: 0 16px 40px rgba(15,23,42,.10) !important;
+  --shadow2: 0 8px 22px rgba(15,23,42,.10) !important;
+
+  --r:22px !important;
+  --r2:16px !important;
+
+  --violet:#6d28d9 !important;
+  --cyan:#0891b2 !important;
+  --pink:#db2777 !important;
+
+  /* map hc vars so if any page uses them, it still matches */
+  --hc-bg: var(--bg) !important;
+  --hc-card: var(--surface) !important;
+  --hc-text: var(--ink) !important;
+  --hc-muted: #52627a !important;
+  --hc-accent: #2563eb !important;
+  --hc-accent2: var(--violet) !important;
+  --hc-yellow: #ffd400 !important;
+  --hc-gold: #d7b100 !important;
+  --hc-border: rgba(15, 23, 42, 0.10) !important;
+  --hc-shadow: 0 8px 24px rgba(2, 6, 23, 0.08) !important;
+  --hc-radius: 18px !important;
+}
+
+/* Force background + base typography */
+html, body{ background: var(--bg) !important; color: var(--ink) !important; }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji" !important;
+}
+
+/* Force common containers to look like home-clean */
+.container, .wrap, .shell, .page, .main, .rkWrap, .resWrap, .psPage, .cvShell{
+  background: transparent !important;
+}
+
+/* Force cards across your app */
+.card, .panel, .box,
+.detailCard, .rulesCard,
+.cvCard, .rkCard, .resCard,
+.psCard,
+.controlsCard, .featuredCard,
+.compCard, .wideSliderArea,
+.psCompCard, .psH2HMatch,
+.rkTableWrap, .rkList, .resTableWrap{
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--shadow2) !important;
+}
+
+/* Buttons */
+.btn, button, .button, a.btn, input[type="button"], input[type="submit"]{
+  border-radius: 14px !important;
+  border: 1px solid rgba(15,23,42,.14) !important;
+  background: rgba(255,255,255,.92) !important;
+  color: var(--ink) !important;
+  box-shadow: 0 10px 18px rgba(2,6,23,.06) !important;
+}
+.btn.primary, button.primary, .button.primary{
+  background: linear-gradient(135deg, rgba(37,99,235,.92), rgba(109,40,217,.90)) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* Pills/Chips */
+.pill, .chip, .rkChip, .resChip, .psPill, .psChip, .hc-pill, .hc-chip{
+  border-radius: 999px !important;
+  border: 1px solid rgba(15,23,42,.14) !important;
+  background: rgba(15,23,42,.04) !important;
+  color: rgba(15,23,42,.92) !important;
+}
+.pill.registered{ background: rgba(22,163,74,.12) !important; border-color: rgba(22,163,74,.22) !important; color: #14532d !important; }
+.pill.closed{ background: rgba(239,68,68,.10) !important; border-color: rgba(239,68,68,.22) !important; color: #7f1d1d !important; }
+
+/* Headings get tighter tracking like home-clean */
+h1, h2, h3{ letter-spacing: -0.02em !important; }
+
+/* Optional: subtle top glow so you can instantly tell CSS loaded */
+body::before{
+  content:"";
+  position: fixed;
+  left:0; right:0; top:0;
+  height: 240px;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(37,99,235,.10), transparent 55%),
+    radial-gradient(900px 240px at 85% 0%, rgba(109,40,217,.10), transparent 55%);
+  z-index: 0;
+}
+/* keep page content above glow */
+body > *{ position: relative; z-index: 1; }
+
+/* =========================================================
+   HOME-CLEAN THEME OVERLAY (NON-DESTRUCTIVE) — COMPETITION VIEW
+   - Appended to the existing competition-view.css
+   - DOES NOT remove/replace any prior rules, only overrides visuals
+   - Keeps all existing IDs/classes intact for competition-view.js
+========================================================= */
+
+/* Map competition-view tokens to home-clean tokens */
+:root{
+  --bg: var(--hc-bg, #f7f9fc) !important;
+  --card: var(--hc-card, #ffffff) !important;
+  --soft: rgba(255,255,255,0.85) !important;
+
+  --ink: var(--hc-text, #0f172a) !important;
+  --muted: rgba(15,23,42,.68) !important;
+  --line: var(--hc-border, rgba(15,23,42,.10)) !important;
+
+  --shadow: var(--hc-shadow, 0 8px 24px rgba(2, 6, 23, 0.08)) !important;
+  --shadow2: 0 10px 22px rgba(2, 6, 23, 0.06) !important;
+
+  /* Accent mapping to home clean */
+  --pink: var(--hc-accent2, #6d28d9) !important;
+  --vio: var(--hc-accent2, #6d28d9) !important;
+  --cyan: var(--hc-accent, #2563eb) !important;
+  --amber: #f59e0b !important;
+  --green: #22c55e !important;
+
+  --vioBg: rgba(109,40,217,.10) !important;
+  --cyanBg: rgba(37,99,235,.10) !important;
+  --pinkBg: rgba(37,99,235,.10) !important; /* keep subtle */
+  --amberBg: rgba(251,191,36,.18) !important;
+  --greenBg: rgba(16,185,129,.12) !important;
+
+  --goldBg: rgba(255,247,220,.92) !important;
+  --goldBd: rgba(215,177,0,.28) !important;
+  --goldTx: #7a5a10 !important;
+
+  --radius: var(--hc-radius, 18px) !important;
+}
+
+/* Force base background + font (home-clean vibe) */
+html, body{
+  background: var(--bg) !important;
+  color: var(--ink) !important;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji" !important;
+}
+
+/* Subtle hero glow like home-clean */
+body::before{
+  content:"";
+  position: fixed;
+  left:0; right:0; top:0;
+  height: 240px;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(37,99,235,.10), transparent 55%),
+    radial-gradient(900px 240px at 85% 0%, rgba(109,40,217,.10), transparent 55%);
+  z-index: 0;
+}
+body > *{ position: relative; z-index: 1; }
+
+/* Shell spacing */
+.cvShell{
+  max-width: 1020px !important;
+  margin: 18px auto !important;
+}
+
+/* Card look */
+.cvCard{
+  border: 1px solid var(--line) !important;
+  border-radius: calc(var(--radius) + 6px) !important;
+  background: var(--card) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+/* Header gradient matches home-clean */
+.cvTop{
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(37,99,235,.10), transparent 55%) ,
+    radial-gradient(900px 240px at 90% 0%, rgba(109,40,217,.08), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(244,248,255,.92)) !important;
+  border-bottom: 1px solid rgba(15,23,42,.08) !important;
+}
+
+/* Title + date accent */
+.cvTitle{ letter-spacing: -0.03em !important; }
+.cvDate{ color: var(--hc-accent, #2563eb) !important; }
+
+/* Buttons align to home-clean */
+.btn{
+  border-radius: 14px !important;
+  border: 1px solid rgba(15,23,42,.14) !important;
+  background: rgba(255,255,255,.92) !important;
+  color: var(--ink) !important;
+  box-shadow: 0 10px 18px rgba(2,6,23,.06) !important;
+}
+.btn.primary{
+  background: linear-gradient(90deg, var(--hc-accent, #2563eb), var(--hc-accent2, #6d28d9)) !important;
+  border-color: transparent !important;
+  color:#fff !important;
+}
+.btn.ghost{
+  background: rgba(255,255,255,.65) !important;
+}
+
+/* Pills: use home-clean style */
+.pill{
+  border-radius: 999px !important;
+  border: 1px solid rgba(37,99,235,.20) !important;
+  background: rgba(37,99,235,.08) !important;
+  color: var(--hc-accent, #2563eb) !important;
+}
+.pill.violet{ background: rgba(109,40,217,.10) !important; border-color: rgba(109,40,217,.22) !important; color: rgba(109,40,217,1) !important; }
+.pill.cyan{ background: rgba(37,99,235,.10) !important; border-color: rgba(37,99,235,.20) !important; color: rgba(37,99,235,1) !important; }
+.pill.amber{ background: rgba(251,191,36,.18) !important; border-color: rgba(180,83,9,.25) !important; color: rgba(120,53,15,1) !important; }
+.pill.green, .pill.registered{ background: rgba(16,185,129,.12) !important; border-color: rgba(16,185,129,.28) !important; color: rgba(6,95,70,1) !important; }
+.pill.pink, .pill.closed{ background: rgba(239,68,68,.12) !important; border-color: rgba(239,68,68,.30) !important; color: rgba(127,29,29,1) !important; }
+
+/* Banner matches featured style */
+.banner{
+  border-radius: 16px !important;
+  border: 1px solid rgba(15,23,42,.10) !important;
+  background: rgba(15,23,42,.04) !important;
+}
+
+/* Tiles and panels look like home cards */
+.tile, .panel, .acc{
+  border: 1px solid rgba(15,23,42,.10) !important;
+  border-radius: var(--radius) !important;
+  background: rgba(255,255,255,.92) !important;
+  box-shadow: var(--shadow2) !important;
+}
+.tileIcon, .accIcon{
+  border-radius: 14px !important;
+  background: rgba(37,99,235,.08) !important;
+  border-color: rgba(37,99,235,.14) !important;
+}
+
+/* Events chips */
+.eventPill, .tag{
+  border-radius: 12px !important;
+  border-color: rgba(37,99,235,.18) !important;
+  background: rgba(37,99,235,.07) !important;
+}
+
+/* Accordion header gradient */
+.acc > summary{
+  background:
+    linear-gradient(90deg, rgba(37,99,235,.06), rgba(109,40,217,.06), rgba(255,255,255,.0)) !important;
+  border-bottom: 1px solid rgba(15,23,42,.08) !important;
+}
+
+/* Mobile sticky bar */
+.mobileBar{
+  background: rgba(255,255,255,.92) !important;
+  border-top: 1px solid rgba(15,23,42,.10) !important;
+}

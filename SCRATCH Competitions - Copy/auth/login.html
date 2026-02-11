@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <style id="cbCriticalTheme">
+  /* Critical paint: prevent old/dark flash before CSS loads */
+  :root{ color-scheme: light; }
+  html, body{
+    background:#f7f8fb;
+    color:#0f172a;
+  }
+
+  /* Navbar (glass + dark text) */
+  .topbar{
+    position:sticky; top:0; z-index:1000;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    border-bottom: 1px solid rgba(15,23,42,0.10);
+  }
+  .topbar .container.nav{
+    height:64px; display:flex; align-items:center; justify-content:space-between; gap:14px;
+  }
+  .brand, .brand *{ color: rgba(15,23,42,0.92); }
+  .navlinks a{ color: rgba(15,23,42,0.78); font-weight:900; }
+  .navlinks a.on{
+    color: rgba(15,23,42,0.92);
+    background: rgba(15,23,42,0.04);
+    border: 1px solid rgba(15,23,42,0.10);
+    border-radius: 12px;
+  }
+  .navlinks .btn.primary, .navlinks a.btn.primary{
+    background: linear-gradient(90deg, #2563eb, #6d28d9);
+    border-color: transparent;
+    color:#fff;
+  }
+
+  /* Burger + drawer: keep light */
+  .burgerBtn{
+    background: rgba(255,255,255,0.86);
+    border: 1px solid rgba(15,23,42,0.14);
+    border-radius:14px;
+    width:42px; height:42px;
+    display:inline-flex; align-items:center; justify-content:center;
+  }
+  .burgerIcon span{ background: rgba(15,23,42,0.86); }
+
+  .drawerOverlay{ background: rgba(2,6,23,0.32); }
+  .drawer{
+    background: rgba(255,255,255,0.92);
+    border-left: 1px solid rgba(15,23,42,0.12);
+  }
+  .drawerHeader, .drawerHeader *{ color: rgba(15,23,42,0.92); }
+  .drawerLinks a{
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(15,23,42,0.10);
+    color: rgba(15,23,42,0.90);
+  }
+  .drawerLinks a .hint{ color: rgba(15,23,42,0.60); }
+</style>
+<title>Sign in • Cubeology Competitions</title>
+
+  <!-- Your site styles -->
+  <link rel="stylesheet" href="/styles/theme.css">
+  <link rel="stylesheet" href="/styles/components.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/pages.css">
+
+  <script src="/js/config.js"></script>
+  <script src="/js/nav.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    .authWrap{
+      padding: 22px 12px 30px;
+      background: radial-gradient(1200px 500px at 50% 0%, rgba(124,58,237,.10), transparent 60%),
+                  radial-gradient(1000px 420px at 80% 20%, rgba(219,39,119,.07), transparent 60%);
+      min-height: calc(100vh - 140px);
+    }
+    .authShell{ max-width: 980px; margin: 0 auto; }
+    .authCard{
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .authH1{ margin:0; font-size:24px; font-weight:950; }
+    .authSub{
+      margin: 8px 0 0;
+      color: rgba(15,23,42,.65);
+      font-weight: 750;
+      line-height: 1.35;
+      font-size: 13px;
+    }
+
+    .tabs{
+      display:flex;
+      gap: 6px;
+      margin-top: 14px;
+      padding: 6px;
+      border-radius: 16px;
+      border: 1px solid rgba(15,23,42,.10);
+      background: rgba(255,255,255,.65);
+      backdrop-filter: blur(6px);
+    }
+    .tab{
+      flex:1;
+      border: 1px solid transparent;
+      background: transparent;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 950;
+      cursor: pointer;
+      color: rgba(15,23,42,.75);
+    }
+    .tab.on{
+      background: #fff;
+      border-color: rgba(15,23,42,.10);
+      box-shadow: 0 10px 25px rgba(0,0,0,.06);
+      color: rgba(15,23,42,.95);
+    }
+
+    .field{ display:flex; flex-direction:column; gap:6px; margin-top:12px; }
+    .field label{ font-weight:950; font-size:13px; color: rgba(15,23,42,.72); }
+    .field input{
+      width:100%;
+      border: 1px solid rgba(15,23,42,.14);
+      border-radius: 14px;
+      padding: 12px 12px;
+      font-size: 14px;
+      outline: none;
+      background: #fff;
+    }
+
+    .linkRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:10px;
+      font-size:13px;
+      font-weight:850;
+      color: rgba(15,23,42,.72);
+    }
+    .linkBtn{
+      border:none;
+      background:transparent;
+      color: #7c3aed;
+      font-weight: 950;
+      cursor:pointer;
+      padding:0;
+    }
+    .linkBtn:hover{ text-decoration: underline; }
+
+    /* Buttons: compact + mobile friendly */
+    .row{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .row .btn{
+      width:100%;
+      padding: 10px 12px !important;
+      border-radius: 14px !important;
+      font-size: 14px !important;
+      min-height: 42px;
+      font-weight: 900;
+      line-height: 1.1 !important;
+    }
+    @media (max-width: 380px){
+      .row{ gap:8px; }
+      .row .btn{ padding: 9px 10px !important; font-size: 13px !important; min-height: 40px; }
+    }
+
+    /* OTP panel */
+    .otpBox{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px dashed rgba(15,23,42,.18);
+      background: rgba(255,255,255,.55);
+      display:none;
+    }
+    .otpGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      align-items:end;
+    }
+    @media (max-width: 560px){
+      .otpGrid{ grid-template-columns: 1fr; }
+    }
+
+    .resendRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .resendBtn{
+      border: 1px solid rgba(15,23,42,.14);
+      background:#fff;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-weight: 900;
+      font-size: 13px;
+      cursor:pointer;
+      min-height: 40px;
+      white-space:nowrap;
+    }
+    .resendBtn:disabled{
+      cursor:not-allowed;
+      opacity:.6;
+    }
+    .resendHint{
+      color: rgba(15,23,42,.62);
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    /* Google section at bottom (separate) */
+    .googleSection{
+      margin-top: 16px;
+      border-top: 1px solid rgba(15,23,42,.10);
+      padding-top: 14px;
+    }
+    .googleTitle{
+      color: rgba(15,23,42,.55);
+      font-weight: 900;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .googleSection .btn{
+      width:100%;
+      padding: 10px 12px !important;
+      border-radius: 14px !important;
+      font-size: 14px !important;
+      min-height: 42px;
+      font-weight: 900;
+    }
+
+    .authMsg{
+      margin-top:14px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(15,23,42,.10);
+      background: rgba(15,23,42,.03);
+      display:none;
+      font-weight: 900;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    .authMsg.success{ background: rgba(34,197,94,.10); border-color: rgba(34,197,94,.25); }
+    .authMsg.error{ background: rgba(239,68,68,.08); border-color: rgba(239,68,68,.25); }
+    .authMsg.info{ background: rgba(59,130,246,.08); border-color: rgba(59,130,246,.20); }
+  </style>
+</head>
+
+<body>
+  <!-- SAME HEADER AS YOUR SITE -->
+  <div class="topbar">
+    <div class="container nav">
+      <a class="brand brandLink" href="/" aria-label="Go to Home">
+        <div class="brandMark">🏁</div>
+        <div>Cubeology Competitions</div>
+      </a>
+
+      <div class="navlinks">
+        <a href="/">Home</a>
+        <a href="/competitions/">Competitions</a>
+        <a href="/rankings/">Rankings</a>
+        <a href="/timer/">Timer</a>
+        <a class="btn primary" href="https://thecubeology.com" target="_blank" rel="noopener">Store</a>
+      </div>
+
+      <button class="burgerBtn" type="button" aria-label="Open menu" data-nav-open>
+        <div class="burgerIcon" aria-hidden="true"><span></span><span></span><span></span></div>
+      </button>
+    </div>
+  </div>
+
+  <div class="drawerOverlay" data-nav-overlay></div>
+  <aside class="drawer" data-nav-drawer aria-label="Site menu">
+    <div class="drawerHeader">
+      <div class="drawerBrand">
+        <div class="drawerBrandMark">🏁</div>
+        <div>Menu</div>
+      </div>
+      <button class="drawerClose" type="button" aria-label="Close menu" data-nav-close>✕</button>
+    </div>
+
+    <nav class="drawerLinks">
+      <a href="/"><span>Home</span><span class="hint">Main hub</span></a>
+      <a href="/competitions/"><span>Competitions</span><span class="hint">Upcoming • Past</span></a>
+      <a href="/rankings/"><span>Rankings</span><span class="hint">Results & profiles</span></a>
+      <a href="/timer/"><span>Timer</span><span class="hint">Practice</span></a>
+      <a href="https://thecubeology.com" target="_blank" rel="noopener"><span>Store</span><span class="hint">thecubeology.com</span></a>
+    </nav>
+
+    <div class="drawerFooter">Cubeology Competitions</div>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="authWrap">
+    <div class="authShell">
+      <div class="card authCard">
+
+        <h1 class="authH1" id="title">Sign in</h1>
+        <p class="authSub" id="subtitle">Use password as primary. OTP / login link is available as a backup option.</p>
+
+        <div class="tabs">
+          <button class="tab on" type="button" data-mode="signin">Sign in</button>
+          <button class="tab" type="button" data-mode="signup">Sign up</button>
+        </div>
+
+        <form id="formPassword" style="margin-top:14px;">
+          <div class="field">
+            <label>Email</label>
+            <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+
+          <div class="field" id="passwordField">
+            <label>Password</label>
+            <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+          </div>
+
+          <div class="linkRow">
+            <span id="switchText">Use OTP / login link instead?</span>
+            <button class="linkBtn" type="button" id="toggleOtp">Use OTP</button>
+          </div>
+
+          <!-- Primary actions (changes based on mode in auth.js) -->
+          <div class="row">
+            <button class="btn primary" type="submit" id="primaryBtn">Sign in</button>
+            <button class="btn" type="button" id="secondaryBtn">Forgot password?</button>
+          </div>
+
+          <!-- OTP box (auto-send on Continue; verify uses same primary button) -->
+          <div class="otpBox" id="otpBox">
+            <div class="otpGrid">
+              <div class="field" style="margin-top:0;">
+                <label>6-digit OTP</label>
+                <input id="otpCode" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="123456">
+              </div>
+
+              <div>
+                <button class="btn" type="button" id="resendOtpBtn" style="width:100%;">Resend OTP (60s)</button>
+              </div>
+            </div>
+
+            <div class="resendRow">
+              <div class="resendHint" id="otpStatusHint">
+                After you click Continue, we’ll send an email link + OTP automatically.
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- Google separated (cleaner UI) -->
+        <div class="googleSection">
+          <div class="googleTitle">Or continue with</div>
+          <button class="btn" type="button" id="btnGoogle">Continue with Google</button>
+        </div>
+
+        <div id="msg" class="authMsg info"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAME FOOTER AS YOUR SITE -->
+  <div class="footer footerLight">
+    <div class="container footerInner">
+      <div class="muted">© Cubeology Competitions</div>
+      <div class="footerLinks">
+        <a href="/competitions/">Competitions</a>
+        <a href="/rankings/">Rankings</a>
+        <a href="/timer/">Timer</a>
+        <a href="https://thecubeology.com" target="_blank" rel="noopener">Store</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Compete • Cubeology</title>
+
+  <!-- your existing global site CSS -->
+  <link rel="stylesheet" href="/styles/theme.css">
+  <link rel="stylesheet" href="/styles/components.css">
+  <link rel="stylesheet" href="/styles/pages.css">
+
+  <!-- compete page css -->
+  <link rel="stylesheet" href="./compete.css">
+
+  <!-- your existing nav -->
+  <script src="/js/nav.js" defer></script>
+</head>
+
+<body>
+  <!-- Header (same as your page) -->
+  <div class="topbar">
+    <div class="container nav">
+      <a class="brand brandLink" href="/" aria-label="Go to Home">
+        <div class="brandMark">🏁</div>
+        <div>Cubeology Competitions</div>
+      </a>
+
+      <div class="navlinks">
+        <a href="/">Home</a>
+        <a href="/competitions/">Competitions</a>
+        <a href="/rankings/">Rankings</a>
+        <a href="/timer/">Timer</a>
+        <a class="btn primary" href="https://thecubeology.com" target="_blank" rel="noopener">Store</a>
+      </div>
+
+      <button class="burgerBtn" type="button" aria-label="Open menu" data-nav-open>
+        <div class="burgerIcon" aria-hidden="true"><span></span><span></span><span></span></div>
+      </button>
+    </div>
+  </div>
+
+  <div class="drawerOverlay" data-nav-overlay></div>
+  <aside class="drawer" data-nav-drawer aria-label="Site menu">
+    <div class="drawerHeader">
+      <div class="drawerBrand">
+        <div class="drawerBrandMark">🏁</div>
+        <div>Menu</div>
+      </div>
+      <button class="drawerClose" type="button" aria-label="Close menu" data-nav-close>✕</button>
+    </div>
+
+    <nav class="drawerLinks">
+      <a href="/"><span>Home</span><span class="hint">Main hub</span></a>
+      <a href="/competitions/"><span>Competitions</span><span class="hint">Upcoming • Ongoing • Past</span></a>
+      <a href="/rankings/"><span>Rankings</span><span class="hint">Results & profiles</span></a>
+      <a href="/timer/"><span>Timer</span><span class="hint">Practice & submit</span></a>
+      <a href="https://thecubeology.com" target="_blank" rel="noopener"><span>Store</span><span class="hint">thecubeology.com</span></a>
+    </nav>
+
+    <div class="drawerFooter">Cubeology Competitions</div>
+  </aside>
+
+  <div class="container section" style="padding-bottom:0;">
+    <a class="btn ghost" href="/competitions/">← Back to Competitions</a>
+  </div>
+
+  <main class="container section">
+    <!-- ✅ Loading Overlay -->
+    <div id="loadingOverlay">
+      <div id="loadingCard">
+        <div id="loadingRibbon"></div>
+        <div id="loadingPad">
+          <div id="loadingTitle">Loading… please wait</div>
+          <div id="loadingSub">Fetching competition details. Don’t refresh.</div>
+          <div id="loadingDots">
+            <span class="ldot"></span><span class="ldot"></span><span class="ldot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portalWrap">
+      <!-- Header Card -->
+      <div class="portalCard">
+        <div class="portalRibbon"></div>
+        <div class="portalPad">
+          <div id="compName" class="portalTitle">Competition</div>
+          <div class="portalSub">Select your event → Login → Enter 5 solves → Submit video after the slot ends</div>
+
+          <div id="msg" class="portalMsg">Select an event to begin.</div>
+        </div>
+      </div>
+
+      <!-- HOME: Event list -->
+      <div id="homeBox" class="portalSection">
+        <div class="portalSectionTitle">Events</div>
+        <div id="eventsWrap" class="eventsGrid"></div>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginBox" class="portalCard" style="display:none;margin-top:14px;">
+        <div class="portalRibbonSmall"></div>
+        <div class="portalPad">
+          <div class="rowTop">
+            <div>
+              <div id="loginEventTitle" class="portalH">Event Login</div>
+              <div id="loginEventTime" class="portalMeta"></div>
+            </div>
+            <button id="btnHomeFromLogin" class="btnGhost">Home</button>
+          </div>
+
+          <div class="portalInfoBox">
+            <div class="portalInfoTitle">Before you login (mandatory)</div>
+            <div class="portalInfoText">
+              ☐ Start recording (continuous video)<br>
+              ☐ Timer + cube clearly visible<br>
+              ☐ No cuts / edits in the video
+            </div>
+          </div>
+
+          <div style="margin-top:14px;font-weight:950;color:var(--dark);">Login</div>
+          <input id="pid" class="portalInput" placeholder="PID (example: rco26-001)" inputmode="text" autocapitalize="none" autocomplete="username">
+          <input id="pass" class="portalInput" type="password" placeholder="Password" autocomplete="current-password">
+
+          <button id="btnLogin" class="btnPrimaryWide">Login &amp; Start</button>
+          <div class="portalTip">Tip: On mobile, avoid switching apps/tabs during solves.</div>
+        </div>
+      </div>
+
+      <!-- PLAY -->
+      <div id="playBox" class="portalCard" style="display:none;margin-top:14px;">
+        <div class="portalRibbonSmall"></div>
+        <div class="portalPad">
+          <div class="rowTop" style="align-items:flex-start;">
+            <div>
+              <div id="eventTitle" class="portalH"></div>
+              <div id="eventTime" class="portalMeta"></div>
+
+              <div class="solveRow">
+                <div id="solveDots" class="solveDots"></div>
+                <div id="solveLabel" class="solveLabel"></div>
+              </div>
+            </div>
+            <div id="phasePill" class="phasePill"></div>
+          </div>
+
+          <div style="margin-top:12px;font-weight:950;color:var(--dark);">
+            Scramble <span id="scrNo">1</span> / <span id="scrTotal">5</span>
+          </div>
+
+          <div id="scrText" class="scrBox scrFadeIn"></div>
+          <img id="scrImg" class="scrImg" alt="Scramble image">
+
+          <!-- MODE -->
+          <div style="margin-top:14px;">
+            <div style="font-weight:950;color:var(--dark);">Mode</div>
+            <div class="modeGrid">
+              <button id="btnModeTimer" type="button" class="btnMode">Timer</button>
+              <button id="btnModeTyping" type="button" class="btnMode">Typing</button>
+            </div>
+            <div id="modeHint" class="modeHint">
+              Choose <b>Timer</b> to use inbuilt timer, or <b>Typing</b> to manually enter your time.
+            </div>
+          </div>
+
+          <div id="timeErr" class="timeErr"></div>
+
+          <!-- TIMER -->
+          <div id="timerWrap" class="timerWrap" style="display:none;">
+            <div id="timerDisplay" class="timerDisplay">0.00</div>
+            <div id="timerInfo" class="timerInfo"></div>
+
+            <div style="margin-top:10px;">
+              <div style="font-weight:950;color:var(--dark);font-size:13px;">Penalty</div>
+              <div class="penGrid">
+                <button id="btnOK" type="button" class="btnPen">OK</button>
+                <button id="btnPlus2" type="button" class="btnPen">+2</button>
+                <button id="btnDNFTimer" type="button" class="btnPen">DNF</button>
+              </div>
+
+              <div id="penaltySummary" class="penSummary" style="display:none;"></div>
+
+              <div class="penHint">
+                After stopping timer, choose <b>OK</b>, <b>+2</b>, or <b>DNF</b>. (Default is OK)
+              </div>
+            </div>
+          </div>
+
+          <!-- TYPING -->
+          <div id="typingWrap" style="display:none;margin-top:12px;">
+            <div style="font-weight:950;color:var(--dark);">Time</div>
+
+            <div class="typingRow">
+              <input id="timeValue" class="portalInput" style="margin-top:0;flex:1;" placeholder="mm:ss.xx  or  ss.xx  or  DNF" inputmode="decimal">
+              <button id="btnDNF" type="button" class="btnGhost" style="min-width:84px;">DNF</button>
+            </div>
+
+            <div class="modeHint" style="margin-top:10px;">
+              If you have a <b>+2</b> penalty, add 2 seconds and enter the final time. If you have a <b>DNF</b>, type <b>DNF</b>.
+            </div>
+          </div>
+
+          <div id="saveToast" class="saveToast" style="display:none;"></div>
+
+          <button id="btnNext" class="btnGreenWide">Lock Time &amp; Next</button>
+          <div class="portalTip">⚠️ Once locked, a solve cannot be edited.</div>
+        </div>
+      </div>
+
+      <!-- DONE -->
+      <div id="doneBox" class="portalCard" style="display:none;margin-top:14px;">
+        <div class="portalRibbonSmall"></div>
+        <div class="portalPad">
+          <div style="font-weight:950;color:var(--dark);">All solves submitted ✅</div>
+
+          <div id="videoOpensText" style="margin-top:6px;color:var(--muted);font-weight:850;"></div>
+
+          <div id="ao5Wrap" class="ao5Wrap" style="display:none;">
+            <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;">
+              <div style="font-weight:950;color:var(--dark);">Average of 5 (Ao5)</div>
+              <div id="ao5Value" class="ao5Value"></div>
+            </div>
+            <div style="margin-top:6px;color:var(--muted);font-weight:850;font-size:12.5px;">
+              Best &amp; worst removed • 1 DNF counts as worst • 2 DNFs = Ao5 is DNF
+            </div>
+
+            <div class="ao5ListWrap">
+              <div style="font-weight:950;color:var(--dark);font-size:13px;">Your 5 solves</div>
+              <div id="solveList" class="solveList"></div>
+            </div>
+          </div>
+
+          <div class="twoBtns">
+            <button id="btnHomeFromDone" class="btnGhost">Home</button>
+            <button id="btnGoToVideo" class="btnBlue">Go to Video Submission</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIDEO -->
+      <div id="videoBox" class="portalCard" style="display:none;margin-top:14px;">
+        <div class="portalRibbonSmall"></div>
+        <div class="portalPad">
+          <div class="rowTop" style="align-items:flex-start;">
+            <div>
+              <div style="font-weight:950;color:var(--dark);">Submit Video Link</div>
+              <div id="videoWindowText" style="margin-top:6px;color:var(--muted);font-weight:850;font-size:13px;"></div>
+            </div>
+            <button id="btnHomeFromVideo" class="btnGhost">Home</button>
+          </div>
+
+          <input id="videoLink" class="portalInput" placeholder="Paste YouTube / Drive link" inputmode="url">
+
+          <div class="modeHint" style="margin-top:10px;">
+            Recommended: <b>YouTube (Unlisted)</b>. Google Drive accepted if viewable (anyone with link).
+          </div>
+
+          <button id="btnVideo" class="btnBlueWide">Submit Video</button>
+        </div>
+      </div>
+
+      <!-- MODAL -->
+      <div id="modal" style="display:none;position:fixed;inset:0;background:rgba(11,27,58,.35);z-index:9999;padding:18px;">
+        <div style="max-width:520px;margin:10vh auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 22px 60px rgba(0,0,0,.25);border:1px solid var(--border);">
+          <div style="height:10px;background:linear-gradient(90deg,#0b1b3a 0%,#1d4ed8 55%,#0b1b3a 100%);"></div>
+          <div style="padding:16px 16px 14px;">
+            <div id="modalTitle" style="font-weight:950;color:var(--dark);font-size:16px;"></div>
+            <div id="modalBody" style="margin-top:8px;color:var(--muted);font-weight:850;line-height:1.5;"></div>
+            <button id="modalOk" class="btnPrimaryWide" style="margin-top:14px;">OK</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script type="module" src="./compete.js"></script>
+</body>
+</html>

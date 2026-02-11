@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <style id="cbCriticalTheme">
+  /* Critical paint: prevent old/dark flash before CSS loads */
+  :root{ color-scheme: light; }
+  html, body{
+    background:#f7f8fb;
+    color:#0f172a;
+  }
+
+  /* Navbar (glass + dark text) */
+  .topbar{
+    position:sticky; top:0; z-index:1000;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    border-bottom: 1px solid rgba(15,23,42,0.10);
+  }
+  .topbar .container.nav{
+    height:64px; display:flex; align-items:center; justify-content:space-between; gap:14px;
+  }
+  .brand, .brand *{ color: rgba(15,23,42,0.92); }
+  .navlinks a{ color: rgba(15,23,42,0.78); font-weight:900; }
+  .navlinks a.on{
+    color: rgba(15,23,42,0.92);
+    background: rgba(15,23,42,0.04);
+    border: 1px solid rgba(15,23,42,0.10);
+    border-radius: 12px;
+  }
+  .navlinks .btn.primary, .navlinks a.btn.primary{
+    background: linear-gradient(90deg, #2563eb, #6d28d9);
+    border-color: transparent;
+    color:#fff;
+  }
+
+  /* Burger + drawer: keep light */
+  .burgerBtn{
+    background: rgba(255,255,255,0.86);
+    border: 1px solid rgba(15,23,42,0.14);
+    border-radius:14px;
+    width:42px; height:42px;
+    display:inline-flex; align-items:center; justify-content:center;
+  }
+  .burgerIcon span{ background: rgba(15,23,42,0.86); }
+
+  .drawerOverlay{ background: rgba(2,6,23,0.32); }
+  .drawer{
+    background: rgba(255,255,255,0.92);
+    border-left: 1px solid rgba(15,23,42,0.12);
+  }
+  .drawerHeader, .drawerHeader *{ color: rgba(15,23,42,0.92); }
+  .drawerLinks a{
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(15,23,42,0.10);
+    color: rgba(15,23,42,0.90);
+  }
+  .drawerLinks a .hint{ color: rgba(15,23,42,0.60); }
+</style>
+<title>Signing in… • Cubeology</title>
+
+  <link rel="stylesheet" href="/styles/theme.css">
+  <link rel="stylesheet" href="/styles/components.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/pages.css">
+
+  <script src="/js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+  <div class="container section">
+    <div class="card" style="padding:16px;">
+      <h1 class="h1" style="margin:0 0 10px 0;">Signing you in…</h1>
+      <div class="muted">Please wait.</div>
+    </div>
+  </div>
+
+  <script>
+    (async function () {
+      const supabase = window.supabase.createClient(
+        window.CB.SUPABASE_URL,
+        window.CB.SUPABASE_KEY
+      );
+
+      await new Promise(r => setTimeout(r, 300));
+
+      const { data } = await supabase.auth.getSession();
+      if (!(data && data.session)) {
+        location.replace("/auth/login.html");
+        return;
+      }
+
+      // Get user email
+      const { data: udata } = await supabase.auth.getUser();
+      const user = udata?.user;
+      const email = (user?.email || "").toLowerCase();
+      if (!email) {
+        location.replace("/auth/account.html");
+        return;
+      }
+
+      // Ensure profile row exists
+      let { data: prof } = await supabase
+        .from("profiles")
+        .select("email,user_id,player_id,player_name,role")
+        .eq("email", email)
+        .maybeSingle();
+
+      if (!prof) {
+        await supabase.from("profiles").insert({ email, user_id: user.id });
+        const res2 = await supabase
+          .from("profiles")
+          .select("email,user_id,player_id,player_name,role")
+          .eq("email", email)
+          .maybeSingle();
+        prof = res2.data || null;
+      } else if (prof && !prof.user_id) {
+        await supabase.from("profiles").update({ user_id: user.id }).eq("email", email);
+      }
+
+      // ✅ Linked => dashboard, else => account (no dashboard for unlinked)
+      if (prof && prof.player_id) location.replace("/dashboard/");
+      else location.replace("/auth/account.html");
+    })();
+  </script>
+</body>
+</html>

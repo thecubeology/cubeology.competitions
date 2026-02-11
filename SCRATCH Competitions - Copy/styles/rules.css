@@ -1,0 +1,395 @@
+:root{
+  --ink:#0f172a;
+  --muted: rgba(15,23,42,.70);
+  --line: rgba(15,23,42,.14);
+  --bg:#ffffff;
+  --surface:#ffffff;
+  --surface2:#fbfbfd;
+  --shadow: 0 18px 44px rgba(15,23,42,.12);
+  --shadow2: 0 10px 26px rgba(15,23,42,.10);
+
+  --goldBg: rgba(255,247,220,.92);
+  --goldBd: rgba(184,134,11,.22);
+  --goldTx: #7a5a10;
+}
+
+.rulesCard{
+  border:1px solid var(--line);
+  border-radius:22px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding:16px;
+}
+
+.rulesHead{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding-bottom:10px;
+  border-bottom:1px dashed rgba(15,23,42,.12);
+}
+
+.rulesTitle{
+  margin:0;
+  font-size:22px;
+  font-weight:1200;
+  color: var(--ink);
+}
+
+.sub{
+  margin-top:6px;
+  color: var(--muted);
+  font-weight:1100;
+}
+
+.badge{
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid var(--goldBd);
+  background: var(--goldBg);
+  color: var(--goldTx);
+  font-weight:1200;
+}
+
+.rulesBody{
+  padding-top:14px;
+  color: var(--ink);
+  font-weight:1050;
+  line-height:1.45;
+}
+
+.rulesBody h2{ margin: 14px 0 8px 0; font-size:18px; font-weight:1200; }
+.rulesBody h3{ margin: 12px 0 6px 0; font-size:16px; font-weight:1200; }
+.rulesBody ul{ margin: 6px 0 10px 18px; }
+.rulesBody li{ margin: 6px 0; }
+.rulesBody .callout{
+  margin-top:12px;
+  padding:12px;
+  border-radius:16px;
+  background: var(--surface2);
+  border:1px solid var(--line);
+  font-weight:1100;
+}
+
+.err{
+  border:1px solid rgba(239,68,68,.35);
+  background: rgba(239,68,68,.08);
+  padding:14px;
+  border-radius:18px;
+  font-weight:1100;
+}
+
+
+/* =========================================================
+   ✅ HOME-CLEAN GLOBAL THEME OVERRIDES (applied across pages)
+   - Keeps your existing selectors + logic intact
+   - Unifies tokens so all pages instantly match the home-clean vibe
+========================================================= */
+:root{
+  --ink:#0f172a;
+  --muted: rgba(15,23,42,.68);
+  --line-soft: rgba(15,23,42,.10);
+  --line: rgba(15,23,42,.14);
+
+  --bg:#f7f9fc;
+  --surface:#ffffff;
+  --surface2:#fbfbfd;
+
+  --shadow: 0 16px 40px rgba(15,23,42,.10);
+  --shadow2: 0 8px 22px rgba(15,23,42,.10);
+
+  --r:22px;
+  --r2:16px;
+
+  --violet:#6d28d9;
+  --cyan:#0891b2;
+  --pink:#db2777;
+
+  --goldBg: rgba(255,247,220,.92);
+  --goldBd: rgba(184,134,11,.22);
+  --goldTx: #7a5a10;
+
+  --amberBg: rgba(245,158,11,.16);
+  --amberBd: rgba(245,158,11,.30);
+  --amberTx: #8a5a00;
+
+  --greenBg: rgba(22,163,74,.12);
+  --greenBd: rgba(22,163,74,.22);
+  --greenTx: #14532d;
+
+  --purpleBg: rgba(109,40,217,.10);
+  --purpleBd: rgba(109,40,217,.22);
+
+  --pinkBg: rgba(219,39,119,.10);
+  --pinkBd: rgba(219,39,119,.20);
+
+  --cyanBg: rgba(14,165,233,.10);
+  --cyanBd: rgba(14,165,233,.20);
+}
+
+/* Global base feel */
+html, body{
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Keep your bold-heavy aesthetic consistent */
+body, body *{
+  letter-spacing: .02px;
+}
+
+/* Generic cards/buttons/pills fallback (non-destructive) */
+.card, .panel, .box,
+.detailCard, .rulesCard,
+.cvCard, .rkCard, .resCard,
+.psCard{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow2);
+}
+
+.btn, button, .button, .rkTab, .resChip, .rkChip, .psBtn{
+  border-radius: 14px;
+}
+
+.pill, .chip, .rkChip, .resChip{
+  border-radius: 999px;
+}
+
+
+/* =========================================================
+   ✅ HOME-CLEAN THEME — STRONG OVERRIDES (V3)
+   Purpose: make the change UNMISSABLE even if other CSS wins.
+   - Uses !important on tokens + base elements
+   - Gives a very clear background + card style
+========================================================= */
+:root{
+  --ink:#0f172a !important;
+  --muted: rgba(15,23,42,.68) !important;
+  --line-soft: rgba(15,23,42,.10) !important;
+  --line: rgba(15,23,42,.14) !important;
+
+  /* UNMISSABLE page background */
+  --bg:#f7f9fc !important;
+  --surface:#ffffff !important;
+  --surface2:#fbfbfd !important;
+
+  --shadow: 0 16px 40px rgba(15,23,42,.10) !important;
+  --shadow2: 0 8px 22px rgba(15,23,42,.10) !important;
+
+  --r:22px !important;
+  --r2:16px !important;
+
+  --violet:#6d28d9 !important;
+  --cyan:#0891b2 !important;
+  --pink:#db2777 !important;
+
+  /* map hc vars so if any page uses them, it still matches */
+  --hc-bg: var(--bg) !important;
+  --hc-card: var(--surface) !important;
+  --hc-text: var(--ink) !important;
+  --hc-muted: #52627a !important;
+  --hc-accent: #2563eb !important;
+  --hc-accent2: var(--violet) !important;
+  --hc-yellow: #ffd400 !important;
+  --hc-gold: #d7b100 !important;
+  --hc-border: rgba(15, 23, 42, 0.10) !important;
+  --hc-shadow: 0 8px 24px rgba(2, 6, 23, 0.08) !important;
+  --hc-radius: 18px !important;
+}
+
+/* Force background + base typography */
+html, body{ background: var(--bg) !important; color: var(--ink) !important; }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji" !important;
+}
+
+/* Force common containers to look like home-clean */
+.container, .wrap, .shell, .page, .main, .rkWrap, .resWrap, .psPage, .cvShell{
+  background: transparent !important;
+}
+
+/* Force cards across your app */
+.card, .panel, .box,
+.detailCard, .rulesCard,
+.cvCard, .rkCard, .resCard,
+.psCard,
+.controlsCard, .featuredCard,
+.compCard, .wideSliderArea,
+.psCompCard, .psH2HMatch,
+.rkTableWrap, .rkList, .resTableWrap{
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--shadow2) !important;
+}
+
+/* Buttons */
+.btn, button, .button, a.btn, input[type="button"], input[type="submit"]{
+  border-radius: 14px !important;
+  border: 1px solid rgba(15,23,42,.14) !important;
+  background: rgba(255,255,255,.92) !important;
+  color: var(--ink) !important;
+  box-shadow: 0 10px 18px rgba(2,6,23,.06) !important;
+}
+.btn.primary, button.primary, .button.primary{
+  background: linear-gradient(135deg, rgba(37,99,235,.92), rgba(109,40,217,.90)) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* Pills/Chips */
+.pill, .chip, .rkChip, .resChip, .psPill, .psChip, .hc-pill, .hc-chip{
+  border-radius: 999px !important;
+  border: 1px solid rgba(15,23,42,.14) !important;
+  background: rgba(15,23,42,.04) !important;
+  color: rgba(15,23,42,.92) !important;
+}
+.pill.registered{ background: rgba(22,163,74,.12) !important; border-color: rgba(22,163,74,.22) !important; color: #14532d !important; }
+.pill.closed{ background: rgba(239,68,68,.10) !important; border-color: rgba(239,68,68,.22) !important; color: #7f1d1d !important; }
+
+/* Headings get tighter tracking like home-clean */
+h1, h2, h3{ letter-spacing: -0.02em !important; }
+
+/* Optional: subtle top glow so you can instantly tell CSS loaded */
+body::before{
+  content:"";
+  position: fixed;
+  left:0; right:0; top:0;
+  height: 240px;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(37,99,235,.10), transparent 55%),
+    radial-gradient(900px 240px at 85% 0%, rgba(109,40,217,.10), transparent 55%);
+  z-index: 0;
+}
+/* keep page content above glow */
+body > *{ position: relative; z-index: 1; }
+
+/* =========================================================
+   HOME-CLEAN THEME OVERLAY (NON-DESTRUCTIVE) — GLOBAL
+   - Appended to the existing page CSS
+   - DOES NOT remove/replace any prior rules, only overrides visuals
+   - Keeps all existing selectors/classes/IDs intact (NO logic changes)
+========================================================= */
+
+/* Map to home-clean tokens (with safe fallbacks) */
+:root{
+  --hc-bg: var(--hc-bg, #f7f9fc);
+  --hc-card: var(--hc-card, #ffffff);
+  --hc-text: var(--hc-text, #0f172a);
+  --hc-muted: var(--hc-muted, #52627a);
+  --hc-accent: var(--hc-accent, #2563eb);
+  --hc-accent2: var(--hc-accent2, #6d28d9);
+  --hc-yellow: var(--hc-yellow, #ffd400);
+  --hc-gold: var(--hc-gold, #d7b100);
+  --hc-border: var(--hc-border, rgba(15, 23, 42, 0.10));
+  --hc-shadow: var(--hc-shadow, 0 8px 24px rgba(2, 6, 23, 0.08));
+}
+
+/* Page base */
+html, body{
+  background: var(--hc-bg) !important;
+  color: var(--hc-text) !important;
+}
+
+/* Subtle top glow like home-clean */
+body::before{
+  content:"";
+  position: fixed;
+  left:0; right:0; top:0;
+  height: 240px;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(37,99,235,.10), transparent 55%),
+    radial-gradient(900px 240px at 85% 0%, rgba(109,40,217,.10), transparent 55%);
+  z-index: 0;
+}
+body > *{ position: relative; z-index: 1; }
+
+/* Generic card surfaces (covers your page cards without needing HTML edits) */
+.card,
+.rkHero, .rkTabs, .rkControls, .rkTableWrap,
+.resHero, .resControls, .resTableWrap,
+.rulesCard,
+.psCard, .psTabsCard{
+  background: rgba(255,255,255,.90) !important;
+  border: 1px solid var(--hc-border) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--hc-shadow) !important;
+}
+
+/* Inputs / selects */
+input, select, textarea,
+.rkSelect, .rkSearch, .rkMiniSelect,
+.resSelect, .resSearch, .resMiniSelect{
+  background:#fff !important;
+  border: 1px solid rgba(15,23,42,.14) !important;
+  border-radius: 14px !important;
+}
+
+/* Chips / pills — home-clean vibe */
+.pill, .chip,
+.rkChip, .resChip,
+.psPill, .psChip,
+.rkModeBtn, .rkTab,
+.psTab, .psModeBtn{
+  border-radius: 999px !important;
+}
+
+.rkChip.on, .resChip.on, .rkModeBtn.on{
+  background: linear-gradient(90deg, var(--hc-accent), var(--hc-accent2)) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: 0 10px 22px rgba(37,99,235,.16) !important;
+}
+
+/* Buttons */
+.btn, .rkBtn, .resBtn, .rkShowSolves, .resShowSolves, .psBtn{
+  border-radius: 14px !important;
+  border-color: rgba(15,23,42,.14) !important;
+  box-shadow: 0 10px 18px rgba(2,6,23,.06) !important;
+}
+.btn.primary{
+  background: linear-gradient(90deg, var(--hc-accent), var(--hc-accent2)) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* Section headers accents */
+.rkTitle, .resTitle, .rulesTitle, .psName{
+  letter-spacing: -0.02em !important;
+}
+
+/* Muted text normalization */
+.rkSub, .resSub, .sub, .psCrumbs,
+.rkSmall, .resSmall,
+.rkMetaMuted, .resMetaMuted{
+  color: var(--hc-muted) !important;
+}
+
+/* Tables: softer header + zebra consistent */
+.rkTableHead, .resTableHead{
+  background: rgba(15,23,42,.04) !important;
+  border-bottom: 1px solid rgba(15,23,42,.10) !important;
+}
+.rkRow, .resRow{
+  border-bottom: 1px solid rgba(15,23,42,.06) !important;
+}
+
+
+/* --- Rules: make rules card match home-clean and keep gold badge --- */
+.rulesCard{
+  background:
+    radial-gradient(900px 420px at 20% 0%, rgba(37,99,235,.07), transparent 60%),
+    radial-gradient(900px 420px at 90% 0%, rgba(109,40,217,.06), transparent 60%),
+    rgba(255,255,255,.92) !important;
+}
+.badge{
+  border-color: rgba(215,177,0,.35) !important;
+  background: rgba(255,212,0,.16) !important;
+  color: #7a5a10 !important;
+}

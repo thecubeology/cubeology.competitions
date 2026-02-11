@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prizes | Cubing Clash 3.0 (CC2026)</title>
+  <meta name="description" content="Cubing Clash 3.0 prizes — overall + event prizes across age categories. Actual prizes to be announced soon." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- IMPORTANT: This file is in /cc2026/ root, so CSS must be same-folder -->
+  <link rel="stylesheet" href="cc2026.css" />
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <nav class="navbar" id="navbar">
+      <div class="navbar-inner">
+        <div class="navbar-left">
+          <!-- IMPORTANT: Root file, so back is ./ (index.html) -->
+          <a href="./" class="nav-back" aria-label="Back to CC2026">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span>Back</span>
+          </a>
+          <div class="nav-logo">
+            <span>CC2026 • Prizes</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+    </nav>
+
+    <section class="section" style="padding-top:110px;">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Prizes</span>
+          <h1 class="section-title" style="font-size: clamp(2rem, 4vw, 3.2rem);">₹60,000+ Prize Pool</h1>
+          <p class="section-subtitle">
+            Bigger than ever. More categories. More winners.
+            <strong style="color: var(--cc-gold);">Actual prizes to be announced soon.</strong>
+          </p>
+        </div>
+
+        <div class="fees-grid" style="margin-top: 1.5rem;">
+          <div class="fee-card prize-card reveal">
+            <div class="fee-header">
+              <h3 class="fee-title">Overall Category — Guaranteed Prizes</h3>
+            </div>
+            <div class="prize-tiers">
+              <div class="prize-tier">
+                <div class="prize-tier-content">
+                  <div class="prize-tier-name">Top 8 Overall</div>
+                  <div class="prize-tier-desc">Top 8 across all events will get guaranteed prizes.</div>
+                </div>
+              </div>
+              <div class="prize-tier">
+                <div class="prize-tier-content">
+                  <div class="prize-tier-name">Highlights + Features</div>
+                  <div class="prize-tier-desc">Selected matches / stories will be featured on our YouTube and social pages.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fee-card prize-card reveal">
+            <div class="fee-header">
+              <h3 class="fee-title">Event-wise Prizes — Age Categories</h3>
+            </div>
+            <div class="prize-tiers">
+              <div class="prize-tier">
+                <div class="prize-tier-content">
+                  <div class="prize-tier-name">Top 3 per Event per Age Category</div>
+                  <div class="prize-tier-desc">Prizes for Upto 10, 11–14, and 15+ in each event.</div>
+                </div>
+              </div>
+              <div class="prize-tier">
+                <div class="prize-tier-content">
+                  <div class="prize-tier-name">All Participants</div>
+                  <div class="prize-tier-desc">Every participant gets discount coupons — because showing up matters.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top: 2rem; text-align:center;">
+          <!-- IMPORTANT: Root file, so fees anchor is ./#fees -->
+          <a class="btn btn-primary" href="./#fees">Back to Fees</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Make sure elements are visible even if cc2026.js isn't loaded on this page.
+    // cc2026.css uses .reveal { opacity:0 } until .visible is applied.
+    (function(){
+      const makeVisible = () => {
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => el.classList.add('visible'));
+      };
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', makeVisible);
+      } else {
+        makeVisible();
+      }
+    })();
+
+    // Tiny scroll progress
+    (function(){
+      const bar = document.getElementById('scrollProgress');
+      if(!bar) return;
+      const onScroll = () => {
+        const doc = document.documentElement;
+        const max = (doc.scrollHeight - doc.clientHeight) || 1;
+        const p = Math.min(1, Math.max(0, window.scrollY / max));
+        bar.style.width = (p * 100) + '%';
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    })();
+  </script>
+</body>
+</html>

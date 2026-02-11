@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <style id="cbCriticalTheme">
+  /* Critical paint: prevent old/dark flash before CSS loads */
+  :root{ color-scheme: light; }
+  html, body{
+    background:#f7f8fb;
+    color:#0f172a;
+  }
+
+  /* Navbar (glass + dark text) */
+  .topbar{
+    position:sticky; top:0; z-index:1000;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    border-bottom: 1px solid rgba(15,23,42,0.10);
+  }
+  .topbar .container.nav{
+    height:64px; display:flex; align-items:center; justify-content:space-between; gap:14px;
+  }
+  .brand, .brand *{ color: rgba(15,23,42,0.92); }
+  .navlinks a{ color: rgba(15,23,42,0.78); font-weight:900; }
+  .navlinks a.on{
+    color: rgba(15,23,42,0.92);
+    background: rgba(15,23,42,0.04);
+    border: 1px solid rgba(15,23,42,0.10);
+    border-radius: 12px;
+  }
+  .navlinks .btn.primary, .navlinks a.btn.primary{
+    background: linear-gradient(90deg, #2563eb, #6d28d9);
+    border-color: transparent;
+    color:#fff;
+  }
+
+  /* Burger + drawer: keep light */
+  .burgerBtn{
+    background: rgba(255,255,255,0.86);
+    border: 1px solid rgba(15,23,42,0.14);
+    border-radius:14px;
+    width:42px; height:42px;
+    display:inline-flex; align-items:center; justify-content:center;
+  }
+  .burgerIcon span{ background: rgba(15,23,42,0.86); }
+
+  .drawerOverlay{ background: rgba(2,6,23,0.32); }
+  .drawer{
+    background: rgba(255,255,255,0.92);
+    border-left: 1px solid rgba(15,23,42,0.12);
+  }
+  .drawerHeader, .drawerHeader *{ color: rgba(15,23,42,0.92); }
+  .drawerLinks a{
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(15,23,42,0.10);
+    color: rgba(15,23,42,0.90);
+  }
+  .drawerLinks a .hint{ color: rgba(15,23,42,0.60); }
+</style>
+<title>My Account • Cubeology Competitions</title>
+
+  <link rel="stylesheet" href="/styles/theme.css">
+  <link rel="stylesheet" href="/styles/components.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/pages.css">
+
+  <script src="/js/config.js"></script>
+  <script src="/js/nav.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    .accWrap{padding:22px 12px 30px;min-height:calc(100vh - 140px)}
+    .accShell{max-width:980px;margin:0 auto}
+    .cardPad{padding:16px}
+    .title{margin:0;font-size:22px;font-weight:950}
+
+    /* FIXED RGBA ALPHA VALUES */
+    .sub{margin:8px 0 0;color:rgba(15,23,42,.65);font-weight:750;line-height:1.35}
+
+    .kv{margin-top:14px;display:grid;grid-template-columns:140px 1fr;gap:10px}
+    @media(max-width:640px){.kv{grid-template-columns:1fr}}
+
+    .k{color:rgba(15,23,42,.55);font-weight:950}
+    .v{font-weight:950;word-break:break-word}
+
+    /* Buttons: same as login page (grid + mobile friendly) */
+.row{
+  margin-top: 14px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
+.row .btn{
+  width:100%;
+  padding: 10px 12px !important;
+  border-radius: 14px !important;
+  font-size: 14px !important;
+  min-height: 42px;
+  font-weight: 900;
+  line-height: 1.1 !important;
+}
+@media (max-width: 380px){
+  .row{ gap:8px; }
+  .row .btn{
+    padding: 9px 10px !important;
+    font-size: 13px !important;
+    min-height: 40px;
+  }
+}
+
+
+    .authMsg{
+      margin-top:14px;padding:12px;border-radius:14px;
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(15,23,42,.03);
+      display:none;font-weight:900;font-size:13px;line-height:1.35
+    }
+    .authMsg.success{background:rgba(34,197,94,.10);border-color:rgba(34,197,94,.25)}
+    .authMsg.error{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.25)}
+    .authMsg.info{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.20)}
+
+    .linkHelp{
+      width:100%;
+      border:1px solid rgba(15,23,42,.10);
+      border-radius:16px;
+      padding:12px 14px;
+      background:rgba(15,23,42,.03);
+    }
+    .linkHelp summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-weight:950;
+      color:rgba(15,23,42,.90);
+    }
+    .linkHelp summary::-webkit-details-marker{display:none;}
+
+    .steps{
+      margin-top:10px;
+      font-weight:850;
+      color:rgba(15,23,42,.75);
+      line-height:1.5
+    }
+    .steps ol{margin:8px 0 0 18px;padding:0}
+    .steps li{margin:8px 0}
+    .steps code{font-weight:950}
+    .steps .miniRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .steps .miniRow .btn{flex:1 1 240px}
+
+    .unlinkedNote{
+      margin-top:10px;
+      color:rgba(15,23,42,.65);
+      font-weight:850;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container nav">
+      <a class="brand brandLink" href="/" aria-label="Go to Home">
+        <div class="brandMark">🏁</div>
+        <div>Cubeology Competitions</div>
+      </a>
+
+      <div class="navlinks">
+        <a href="/">Home</a>
+        <a href="/competitions/">Competitions</a>
+        <a href="/rankings/">Rankings</a>
+        <a href="/timer/">Timer</a>
+        <a class="btn primary" href="https://thecubeology.com" target="_blank" rel="noopener">Store</a>
+      </div>
+
+      <button class="burgerBtn" type="button" aria-label="Open menu" data-nav-open>
+        <div class="burgerIcon" aria-hidden="true"><span></span><span></span><span></span></div>
+      </button>
+    </div>
+  </div>
+
+  <div class="drawerOverlay" data-nav-overlay></div>
+  <aside class="drawer" data-nav-drawer aria-label="Site menu">
+    <div class="drawerHeader">
+      <div class="drawerBrand">
+        <div class="drawerBrandMark">🏁</div>
+        <div>Menu</div>
+      </div>
+      <button class="drawerClose" type="button" aria-label="Close menu" data-nav-close>✕</button>
+    </div>
+    <nav class="drawerLinks">
+      <a href="/"><span>Home</span><span class="hint">Main hub</span></a>
+      <a href="/competitions/"><span>Competitions</span><span class="hint">Upcoming • Past</span></a>
+      <a href="/rankings/"><span>Rankings</span><span class="hint">Results & profiles</span></a>
+      <a href="/timer/"><span>Timer</span><span class="hint">Practice</span></a>
+      <a href="https://thecubeology.com" target="_blank" rel="noopener"><span>Store</span><span class="hint">thecubeology.com</span></a>
+    </nav>
+    <div class="drawerFooter">Cubeology Competitions</div>
+  </aside>
+
+  <div class="accWrap">
+    <div class="accShell">
+      <div class="card cardPad">
+        <h1 class="title">My Account</h1>
+        <p class="sub" id="subtitle">Checking your login…</p>
+
+        <div id="msg" class="authMsg info"></div>
+
+        <div class="kv" id="kv" style="display:none;">
+          <div class="k">Email</div><div class="v" id="email">—</div>
+          <div class="k">Player ID</div><div class="v" id="pid">—</div>
+          <div class="k">Name</div><div class="v" id="pname">—</div>
+          <div class="k">Role</div><div class="v" id="role">—</div>
+        </div>
+
+        <div class="row" id="linkedActions" style="display:none;">
+          <a class="btn primary" href="/dashboard/">Dashboard</a>
+          <a class="btn primary" id="btnMyProfile" href="#">Open My Profile</a>
+          <a class="btn" href="/rankings/">Rankings</a>
+          <a class="btn" href="/competitions/">Competitions</a>
+        </div>
+
+        <div id="unlinkedActions" style="display:none;margin-top:16px;">
+          <details class="linkHelp">
+            <summary>
+              Have competed before? Link your profile
+              <span aria-hidden="true">▾</span>
+            </summary>
+
+            <div class="steps">
+              <div style="font-weight:950;margin-top:8px;">Step-by-step</div>
+              <ol>
+                <li>
+                  Find your <code>Player ID (PID)</code> in Cubeology Rankings.
+                  <div class="miniRow">
+                    <a class="btn primary" href="/rankings/">Open Rankings</a>
+                  </div>
+                </li>
+                <li>
+                  Email us at <code>info@thecubeology.com</code> with these compulsory details:
+                  <ul style="margin:8px 0 0 18px;">
+                    <li><b>PID</b></li>
+                    <li><b>Participant name</b></li>
+                    <li><b>Email to link</b> (this logged-in email)</li>
+                  </ul>
+                </li>
+                <li>
+                  Suggested (helps faster linking): attach any proof like a screenshot of payment/registration.
+                </li>
+              </ol>
+
+              <div class="miniRow">
+                <a class="btn" id="mailtoLink" href="#">Email for Linking</a>
+                <a class="btn" href="/competitions/">View Competitions</a>
+              </div>
+            </div>
+          </details>
+
+          <div class="unlinkedNote">
+            Once linked, your private dashboard will automatically show your rankings, results, medals and competition history.
+          </div>
+        </div>
+
+        <div class="row" id="adminActions" style="display:none;">
+          <a class="btn" href="/auth/admin.html">Admin Panel</a>
+        </div>
+
+        <div class="row">
+          <button class="btn" id="btnSignOut" type="button">Sign out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer footerLight">
+    <div class="container footerInner">
+      <div class="muted">© Cubeology Competitions</div>
+      <div class="footerLinks">
+        <a href="/competitions/">Competitions</a>
+        <a href="/rankings/">Rankings</a>
+        <a href="/timer/">Timer</a>
+        <a href="https://thecubeology.com" target="_blank" rel="noopener">Store</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/account.js"></script>
+</body>
+</html>

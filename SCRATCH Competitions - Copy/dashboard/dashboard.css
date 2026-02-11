@@ -1,0 +1,324 @@
+/* Light dashboard theme (local to /dashboard/) */
+
+.dashWrap{
+  padding:22px 12px 30px;
+  min-height:calc(100vh - 140px);
+  background:#f6f7fb;
+}
+
+.dashShell{
+  max-width:1180px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:14px;
+}
+@media(max-width:980px){ .dashShell{grid-template-columns:1fr} }
+
+.dashSide{
+  position:sticky;
+  top:12px;
+  align-self:start;
+  border:1px solid rgba(15,23,42,.08);
+  border-radius:18px;
+  background:#fff;
+  padding:14px;
+  box-shadow:0 10px 30px rgba(15,23,42,.06);
+}
+@media(max-width:980px){ .dashSide{position:relative;top:auto} }
+
+.dashSideTop{display:flex;gap:12px;align-items:center}
+.dashAvatar{
+  width:44px;height:44px;border-radius:16px;
+  display:grid;place-items:center;
+  background:rgba(15,23,42,.03);
+  border:1px solid rgba(15,23,42,.06);
+  font-size:20px;
+}
+.dashName{font-weight:950;font-size:15px}
+.dashMeta{margin-top:2px;font-weight:850;color:rgba(15,23,42,.60);font-size:12px}
+
+.dashNav{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.dashNavBtn{
+  border:1px solid rgba(15,23,42,.08);
+  background:#fff;
+  border-radius:14px;
+  padding:10px 12px;
+  text-align:left;
+  font-weight:950;
+  cursor:pointer;
+  transition:transform .08s ease, border-color .12s ease, background .12s ease;
+}
+.dashNavBtn:hover{
+  transform:translateY(-1px);
+  border-color:rgba(15,23,42,.14);
+  background:rgba(15,23,42,.02);
+}
+.dashNavBtn.on{
+  background:rgba(99,102,241,.08);
+  border-color:rgba(99,102,241,.22);
+}
+.dashSideActions{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.dashHint{margin-top:10px;color:rgba(15,23,42,.55);font-weight:850;font-size:12px}
+
+.dashMain{min-width:0}
+.dashMsg{
+  margin-bottom:12px;padding:12px;border-radius:14px;
+  border:1px solid rgba(15,23,42,.08);
+  background:#fff;
+  box-shadow:0 8px 18px rgba(15,23,42,.05);
+  font-weight:900;font-size:13px;line-height:1.35;
+}
+.dashMsg.success{border-color:rgba(34,197,94,.25); background:rgba(34,197,94,.08)}
+.dashMsg.error{border-color:rgba(239,68,68,.25); background:rgba(239,68,68,.06)}
+.dashMsg.info{border-color:rgba(59,130,246,.18); background:rgba(59,130,246,.06)}
+
+.dashPanel{display:none}
+.dashPanel.on{display:block}
+
+.dashCard{
+  padding:16px;
+  border:1px solid rgba(15,23,42,.08);
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 10px 30px rgba(15,23,42,.06);
+}
+
+.dashH1Row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dashH1{margin:0;font-size:20px;font-weight:950}
+.dashH2{margin:0;font-size:16px;font-weight:950}
+
+.dashStats{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px
+}
+@media(max-width:720px){ .dashStats{grid-template-columns:repeat(2,1fr)} }
+
+.dashStat{
+  border:1px solid rgba(15,23,42,.08);
+  border-radius:16px;
+  padding:12px;
+  background:rgba(15,23,42,.02);
+}
+.dashStatK{font-weight:950;color:rgba(15,23,42,.60);font-size:12px}
+.dashStatV{margin-top:6px;font-weight:950;font-size:18px}
+
+.dashGrid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:720px){ .dashGrid2{grid-template-columns:1fr} }
+
+.dashMini{
+  border:1px solid rgba(15,23,42,.08);
+  border-radius:16px;
+  padding:12px;
+  background:#fff;
+}
+.dashMiniT{font-weight:950;color:rgba(15,23,42,.60);font-size:12px}
+.dashMiniV{margin-top:6px;font-weight:950;font-size:15px}
+
+/* grids */
+.dashCards{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+@media(max-width:900px){ .dashCards{grid-template-columns:1fr} }
+
+/* competition cards */
+.compCard{
+  border:1px solid rgba(15,23,42,.08);
+  border-radius:18px;
+  background:#fff;
+  padding:14px;
+  box-shadow:0 10px 26px rgba(15,23,42,.05);
+}
+
+.compTop{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+.compLeft{min-width:0}
+.compTitle{
+  font-weight:950;
+  font-size:15px;
+  margin:0;
+  line-height:1.2;
+}
+.compMeta{
+  margin-top:6px;
+  font-weight:850;
+  color:rgba(15,23,42,.60);
+  font-size:12px;
+}
+
+.compAction .btn.primary{
+  padding:10px 14px;
+  border-radius:14px;
+  box-shadow:0 10px 24px rgba(219,39,119,.18);
+}
+
+/* results list inside past comp card */
+.compResults{
+  margin-top:12px;
+  border:1px solid rgba(15,23,42,.08);
+  border-radius:16px;
+  overflow:hidden;
+}
+.compResultsHead{
+  display:grid;
+  grid-template-columns:120px 1fr 1fr;
+  gap:0;
+  background:rgba(15,23,42,.02);
+  border-bottom:1px solid rgba(15,23,42,.06);
+  padding:10px 12px;
+  font-weight:950;
+  font-size:12px;
+  color:rgba(15,23,42,.70);
+}
+.compResultsRow{
+  display:grid;
+  grid-template-columns:120px 1fr 1fr;
+  padding:10px 12px;
+  border-bottom:1px solid rgba(15,23,42,.06);
+  font-weight:950;
+  font-size:13px;
+}
+.compResultsRow:last-child{border-bottom:none}
+
+.evChip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(15,23,42,.08);
+  background:#fff;
+  border-radius:999px;
+  padding:6px 10px;
+  font-weight:950;
+  font-size:12px;
+  width:max-content;
+}
+
+.valMuted{color:rgba(15,23,42,.70);font-weight:900}
+.valDNF{color:rgba(239,68,68,.85);font-weight:950}
+
+/* medals tab */
+.medalsGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+@media(max-width:900px){ .medalsGrid{grid-template-columns:1fr} }
+
+.medalCard{
+  border:1px solid rgba(15,23,42,.08);
+  border-radius:18px;
+  background:#fff;
+  padding:14px;
+  box-shadow:0 10px 26px rgba(15,23,42,.05);
+}
+.medalCardT{font-weight:950;font-size:14px;margin:0}
+.medalCardSub{margin-top:6px;color:rgba(15,23,42,.60);font-weight:850;font-size:12px}
+
+.medalRow{
+  margin-top:12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.medalPill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border:1px solid rgba(15,23,42,.08);
+  background:rgba(15,23,42,.02);
+  border-radius:999px;
+  padding:7px 12px;
+  font-weight:950;
+  font-size:12px;
+}
+.medalPill.total{
+  background:rgba(99,102,241,.06);
+  border-color:rgba(99,102,241,.18);
+}
+
+/* table */
+.tableWrap{overflow:auto;border:1px solid rgba(15,23,42,.08);border-radius:16px}
+.table{width:100%;border-collapse:separate;border-spacing:0;min-width:620px;background:#fff}
+.table th,.table td{padding:10px 12px;border-bottom:1px solid rgba(15,23,42,.06);font-size:13px}
+.table th{text-align:left;position:sticky;top:0;background:#fff;font-weight:950}
+.table tr:last-child td{border-bottom:none}
+.mutedCell{color:rgba(15,23,42,.55);font-weight:850}
+
+/* =========================================================
+   HOME-CLEAN THEME OVERLAY (NON-DESTRUCTIVE) — DASHBOARD
+   - Appended to existing dashboard.css
+   - Does NOT remove/replace any prior rules; only visual overrides
+========================================================= */
+:root{
+  --hc-bg: var(--hc-bg, #f7f9fc);
+  --hc-card: var(--hc-card, #ffffff);
+  --hc-text: var(--hc-text, #0f172a);
+  --hc-muted: var(--hc-muted, #52627a);
+  --hc-accent: var(--hc-accent, #2563eb);
+  --hc-accent2: var(--hc-accent2, #6d28d9);
+  --hc-border: var(--hc-border, rgba(15,23,42,.10));
+  --hc-shadow: var(--hc-shadow, 0 8px 24px rgba(2,6,23,.08));
+}
+
+/* base */
+html, body{ background: var(--hc-bg) !important; color: var(--hc-text) !important; }
+
+.dashWrap{
+  background: var(--hc-bg) !important;
+}
+
+/* subtle header glow */
+.dashWrap::before{
+  content:"";
+  position: fixed;
+  left:0; right:0; top:0;
+  height: 240px;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(37,99,235,.10), transparent 55%),
+    radial-gradient(900px 240px at 85% 0%, rgba(109,40,217,.10), transparent 55%);
+  z-index: 0;
+}
+.dashWrap > *{ position: relative; z-index: 1; }
+
+/* cards */
+.dashSide, .dashMsg, .dashCard, .compCard, .medalCard{
+  background: rgba(255,255,255,.92) !important;
+  border: 1px solid var(--hc-border) !important;
+  box-shadow: var(--hc-shadow) !important;
+}
+
+/* nav pills */
+.dashNavBtn.on{
+  background: linear-gradient(90deg, rgba(37,99,235,.10), rgba(109,40,217,.08)) !important;
+  border-color: rgba(37,99,235,.22) !important;
+}
+
+/* stats tiles */
+.dashStat{
+  background: linear-gradient(180deg, rgba(37,99,235,.06), rgba(255,255,255,0)) !important;
+  border-color: rgba(15,23,42,.10) !important;
+}
+.dashStatK, .dashMeta, .dashHint, .dashMiniT, .compMeta, .valMuted{ color: var(--hc-muted) !important; }
+
+/* chips */
+.evChip{
+  border-color: rgba(37,99,235,.20) !important;
+  background: rgba(37,99,235,.08) !important;
+}
+
+/* buttons align */
+.compAction .btn.primary{
+  background: linear-gradient(90deg, var(--hc-accent), var(--hc-accent2)) !important;
+  border-color: transparent !important;
+  box-shadow: 0 10px 24px rgba(37,99,235,.16) !important;
+}

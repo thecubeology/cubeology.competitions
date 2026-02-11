@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prelims Rules | Cubing Clash 3.0 (CC2026)</title>
+  <meta name="description" content="Prelims rules for Cubing Clash 3.0 (CC2026): Ao5 per event. Top 4 from each event qualify for Playoffs., compete flow, video submission deadline, inspection rules, timer + typing mode, WCA regulations." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../cc2026.css" />
+
+  <style>
+    :root { color-scheme: dark; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+    /* Page shell */
+    .rules-shell{ min-height:100vh; }
+    .rules-top{
+      padding: 28px 0 10px;
+    }
+
+    .rules-topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+
+    .rules-back{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      text-decoration:none;
+      color: var(--cc-text, #f3f3f3);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: .22s;
+      font-weight: 700;
+    }
+    .rules-back:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,215,0,.22);
+      background: rgba(255,215,0,.06);
+      color: var(--cc-gold, #ffd700);
+    }
+    .rules-back svg{ width:18px; height:18px; }
+
+    .rules-switch{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .rules-tab{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration:none;
+      font-weight: 800;
+      letter-spacing: .02em;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: var(--cc-text-muted, rgba(255,255,255,.75));
+      transition: .22s;
+    }
+    .rules-tab:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,215,0,.25);
+      background: rgba(255,215,0,.06);
+      color: var(--cc-gold, #ffd700);
+    }
+    .rules-tab.is-active{
+      color: #0a0a0a;
+      background: var(--cc-gold, #ffd700);
+      border-color: rgba(255,215,0,.35);
+      box-shadow: 0 10px 28px rgba(255,215,0,.18);
+    }
+
+    /* Hero */
+    .rules-hero{
+      padding: 14px 0 18px;
+    }
+    .rules-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,215,0,.10);
+      border: 1px solid rgba(255,215,0,.18);
+      color: var(--cc-gold, #ffd700);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      font-size: .72rem;
+    }
+    .rules-title{
+      margin: 14px 0 10px;
+      font-size: clamp(2.1rem, 4.5vw, 3.35rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .rules-lead{
+      max-width: 980px;
+      color: var(--cc-text-muted, rgba(255,255,255,.75));
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* Layout */
+    .rules-layout{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 4px 0 56px; /* FIX: removed the unnecessary extra top gap */
+    }
+
+    .rules-card{
+      border-radius: 18px;
+      border: 1px solid rgba(255,215,0,.14);
+      background: linear-gradient(145deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+      padding: 18px 18px;
+    }
+    .rules-card h2{
+      margin: 0 0 10px;
+      font-size: 1.22rem;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .rules-dot{
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--cc-gold, #ffd700);
+      box-shadow: 0 0 18px rgba(255,215,0,.35);
+      flex: 0 0 auto;
+    }
+    .rules-list{
+      margin: 0;
+      padding-left: 1.15rem;
+      color: var(--cc-text-muted, rgba(255,255,255,.75));
+      line-height: 1.7;
+    }
+    .rules-list li{ margin: .55rem 0; }
+
+    .rules-callout{
+      margin-top: 12px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,215,0,.18);
+      background: rgba(255,215,0,.08);
+      color: var(--cc-text-muted, rgba(255,255,255,.75));
+    }
+    .rules-callout strong{ color: var(--cc-gold, #ffd700); }
+
+    /* Small footer */
+    .rules-footer{
+      padding: 22px 0 28px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      background: rgba(5,5,5,.45);
+      backdrop-filter: blur(12px);
+    }
+    .rules-footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      color: var(--cc-text-muted, rgba(255,255,255,.72));
+      font-size: .95rem;
+    }
+
+    /* Better spacing on small screens */
+    @media (max-width: 520px){
+      .rules-tab, .rules-back{ width: 100%; justify-content:center; }
+      .rules-switch{ width: 100%; }
+      .rules-topbar{ align-items: stretch; }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="rules-shell page-wrapper">
+    <header class="rules-top section">
+      <div class="container">
+        <div class="rules-topbar">
+          <a class="rules-back" href="../" aria-label="Back to overview">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Overview
+          </a>
+
+          <div class="rules-switch" aria-label="Switch rules pages">
+            <a class="rules-tab is-active" href="prelims_rules.html" aria-current="page">Prelims Rules</a>
+            <a class="rules-tab" href="h2h_rules.html">H2H Rules</a>
+          </div>
+        </div>
+
+        <div class="rules-hero">
+          <span class="rules-kicker">Prelims • Ao5 • 1-day slot</span>
+          <h1 class="rules-title">Prelims Rules</h1>
+          <p class="rules-lead">
+            Prelims happen via the <strong style="color:var(--cc-gold);">Compete page</strong>.
+            Start your <strong style="color:var(--cc-gold);">video</strong>, then login using the
+            <strong style="color:var(--cc-gold);">credentials you receive on email</strong> (event-page login — separate from website login).
+            For every registered event, you will do an <strong style="color:var(--cc-gold);">Average of 5 (Ao5)</strong>.
+          </p>
+
+          <div class="rules-callout">
+            <strong>Scheduling:</strong> Each participant competes on <strong>only one</strong> of the 3 prelim days.
+            You will complete <strong>all</strong> your events on the day + slot you chose.
+            Slots are shared after registrations close.
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container">
+        <div class="rules-layout">
+
+          
+
+      <section class="rules-card">
+        <h2><span class="rules-dot"></span>Qualification to Playoffs</h2>
+        <ul class="rules-list">
+          <li>For each event, your <strong>Prelims Ao5</strong> ranking decides qualification.</li>
+          <li><strong>Top 4</strong> from each event qualify for the Playoffs bracket.</li>
+          <li>Playoffs dates: <strong>18–19 Apr 2026</strong> (Pyraminx/Skewb/Clock) and <strong>25–26 Apr 2026</strong> (3×3/2×2).</li>
+        </ul>
+      </section>
+
+<section class="rules-card">
+            <h2><span class="rules-dot"></span>Prelims Flow (Step-by-step)</h2>
+            <ol class="rules-list">
+              <li><strong>Start video recording</strong> exactly as instructed on the Compete page.</li>
+              <li><strong>Login</strong> using the event-page credentials you received on email (not your website login).</li>
+              <li>Select your event and begin the attempt flow.</li>
+              <li>Complete <strong>5 solves (Ao5)</strong> for that event.</li>
+              <li>Submit the attempt as per the Compete page instructions.</li>
+            </ol>
+            <div class="rules-callout">
+              <strong>Visibility:</strong> Keep cube + hands + timer setup clearly visible throughout.
+            </div>
+          </section>
+
+          <!-- NEW: Video Submission Rules -->
+          <section class="rules-card">
+            <h2><span class="rules-dot"></span>Video Submission (Compulsory)</h2>
+            <ul class="rules-list">
+              <li>Your entire prelims attempt <strong>must be recorded on video</strong>.</li>
+              <li>Upload the video as: <strong>YouTube (Unlisted)</strong> OR <strong>Google Drive (View Access)</strong>.</li>
+              <li>The video link must be submitted on the <strong>same event Compete page</strong>.</li>
+              <li><strong>Deadline:</strong> Submit by <strong>midnight (23:59 IST)</strong> of your attempt day.</li>
+              <li>Example: If you compete on <strong>10th April</strong>, you must submit by <strong>midnight of 10th April</strong>.</li>
+            </ul>
+            <div class="rules-callout">
+              <strong>Failure to submit video</strong> will result in your solves <strong>not being verified</strong>,
+              and your results will <strong>not go further into the official database</strong>.
+            </div>
+          </section>
+
+          <section class="rules-card">
+            <h2><span class="rules-dot"></span>Timing Options (Timer vs Typing)</h2>
+            <ul class="rules-list">
+              <li><strong>Inbuilt timer:</strong> Time directly inside the Compete page.</li>
+              <li><strong>Stackmat + typing option:</strong> Use a Stackmat timer and enter times via typing option.</li>
+              <li>Typed entries may be verified using your video if something looks inconsistent.</li>
+            </ul>
+          </section>
+
+          <section class="rules-card">
+            <h2><span class="rules-dot"></span>Inspection Rules</h2>
+            <ul class="rules-list">
+              <li><strong>Timer mode:</strong> Inspection timer is <strong>compulsory</strong>.</li>
+              <li><strong>Typing mode:</strong> Inspection timer is <strong>suggested</strong>.</li>
+              <li>You don’t need to stop inspection — you may start your solve anytime.</li>
+              <li>If you exceed <strong>15 seconds</strong> inspection, penalties may apply (as per Compete page rules).</li>
+            </ul>
+          </section>
+
+          <section class="rules-card">
+            <h2><span class="rules-dot"></span>Fair Play & Verification</h2>
+            <ul class="rules-list">
+              <li>Missing/unclear video evidence can lead to review or rejection of attempts.</li>
+              <li>Time manipulation, scramble misuse, or unfair play may lead to disqualification.</li>
+              <li>Keep lighting + camera stable for smooth verification.</li>
+            </ul>
+            <div class="rules-callout">
+              <strong>Need help?</strong> Email us at
+              <a href="mailto:info@thecubeology.com" style="color:var(--cc-gold);text-decoration:none;font-weight:800;">info@thecubeology.com</a>.
+            </div>
+          </section>
+
+          <!-- NEW: WCA Regulations -->
+          <section class="rules-card">
+            <h2><span class="rules-dot"></span>Regulations</h2>
+            <ul class="rules-list">
+              <li>Standard <strong>WCA Regulations</strong> will apply wherever possible.</li>
+              <li>In case of conflict, Cubing Clash event-specific rules take priority.</li>
+            </ul>
+            <div class="rules-callout">
+              View WCA Regulations:
+              <a href="https://www.worldcubeassociation.org/regulations/" target="_blank" rel="noopener noreferrer"
+                 style="color:var(--cc-gold);text-decoration:none;font-weight:800;">
+                worldcubeassociation.org/regulations
+              </a>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+
+    <footer class="rules-footer">
+      <div class="container">
+        <div class="rules-footer-inner">
+          <span>© 2026 The Cubeology • Cubing Clash 3.0</span>
+          <span>Prelims • Ao5 per event. Top 4 from each event qualify for Playoffs.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Ensure content is visible even if your global reveal system is present.
+    (function(){
+      const makeVisible = () => {
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => el.classList.add('visible'));
+      };
+      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', makeVisible);
+      else makeVisible();
+    })();
+  </script>
+</body>
+</html>
